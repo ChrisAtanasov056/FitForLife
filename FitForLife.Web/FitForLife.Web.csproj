@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CoreAdmin" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.7" />
@@ -21,12 +22,16 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Views\" />
     <Folder Include="Areas\Identity\Account\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data\FitForLife.Data.Common\FitForLife.Data.Common.csproj" />
     <ProjectReference Include="..\Data\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
     <ProjectReference Include="..\Data\FitForLife.Data\FitForLife.Data.csproj" />
+    <ProjectReference Include="..\FitForLife.Services.Data\FitForLife.Services.Data.csproj" />
+    <ProjectReference Include="..\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

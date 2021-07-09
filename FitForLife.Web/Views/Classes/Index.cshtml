@@ -1,0 +1,21 @@
+﻿@page
+<div class="row">
+    <!-- News Posts -->
+    @foreach (var category in @ViewBag.AllClasses)
+    {
+        <div class="col-lg-4">
+            <div class="row">
+                <hr class="bg-dark mx-4" style="height: 6px;" />
+                <!-- News Post -->
+                <div class="news_post">
+                    <div class="news_post_image"><img src="@category.PictureUrl" class="img-fluid" alt="Responsive image"></div>
+                    <div class="news_post_content">
+                        <div class="news_post_title text-center"><a>@category.Name</a></div>
+                        <div class="news_post_text">
+                            <p>@category.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>}
+</div>

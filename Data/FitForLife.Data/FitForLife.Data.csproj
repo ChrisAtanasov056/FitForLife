@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FitForLife.Common\FitForLife.Common.csproj" />
     <ProjectReference Include="..\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
   </ItemGroup>
 

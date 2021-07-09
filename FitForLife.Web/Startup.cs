@@ -1,7 +1,14 @@
 namespace FitForLife
 {
     using FitForLife.Data;
+    using FitForLife.Data.Common;
+    using FitForLife.Data.Common.Repositories;
     using FitForLife.Data.Models;
+    using FitForLife.Data.Repositories;
+    using FitForLife.Data.Seeding;
+    using FitForLife.Models;
+    using FitForLife.Services.Data.Classes;
+    using FitForLife.Services.Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -9,32 +16,63 @@ namespace FitForLife
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    
+    using System.Reflection;
+
     public class Startup
     {
+        private readonly IConfiguration configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<FitForLifeDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection"))
-                .UseSqlServer(b => b.MigrationsAssembly("FitForLife")));
-            services.AddDefaultIdentity<FitForLifeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    configuration.GetConnectionString("DefaultConnection")));
+           
+            services.AddDefaultIdentity<FitForLifeUser>
+                (IdentityOptionsProvider.GetIdentityOptions)
+                .AddRoles<FitForLifeRole>()
                 .AddEntityFrameworkStores<FitForLifeDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddSingleton(this.configuration);
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddCoreAdmin();
+
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
+
+            //App Services
+            services.AddTransient<IClassesService, ClassesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel)
+                .GetTypeInfo()
+                .Assembly);
+            
+            // Seed data on application startup
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<FitForLifeDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                new FitForLifeDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,8 +86,9 @@ namespace FitForLife
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
 

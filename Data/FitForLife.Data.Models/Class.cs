@@ -5,14 +5,13 @@
     using System.ComponentModel.DataAnnotations;
     using FitForLife.Data.Common.Models;
 
-    public class Class : IAuditInfo, IDeletableEntity
+    public class Class : BaseDeletableModel<string>
     {
         public Class()
         {
             this.Id = Guid.NewGuid().ToString();
             this.Clients = new HashSet<FitForLifeUser>();
         }
-        public string Id { get; set; }
 
         [Required]
         [MaxLength(40)]
@@ -26,13 +25,5 @@
 
         public ICollection<FitForLifeUser> Clients { get; set; }
 
-        // Audit Info
-        public DateTime CreatedOn { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-        
-        // Deletable Entity
-        public DateTime? DeletedOn { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }
