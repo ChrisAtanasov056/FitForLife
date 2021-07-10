@@ -27,10 +27,11 @@
     <Folder Include="Areas\Identity\Account\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\FitForLife.Data.Common\FitForLife.Data.Common.csproj" />
-    <ProjectReference Include="..\Data\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
-    <ProjectReference Include="..\Data\FitForLife.Data\FitForLife.Data.csproj" />
-    <ProjectReference Include="..\FitForLife.Services.Data\FitForLife.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Data\FitForLife.Data.Common\FitForLife.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\FitForLife.Data\FitForLife.Data.csproj" />
+    <ProjectReference Include="..\..\FitForLife.Common\FitForLife.Common.csproj" />
+    <ProjectReference Include="..\..\Services\FitForLife.Services.Data\FitForLife.Services.Data.csproj" />
     <ProjectReference Include="..\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj" />
   </ItemGroup>
 
