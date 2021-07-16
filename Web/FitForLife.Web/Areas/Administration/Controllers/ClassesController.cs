@@ -22,5 +22,27 @@
             };
             return this.View(viewModel);
         }
+
+        public IActionResult AddClass()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddClass(ClassInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+            await this.classesService.AddAsync(model.Name, model.Description, model.PictureUrl);
+            return this.RedirectToAction("Index");
+        }
+        public async Task<IActionResult> DeleteClass(int Id)
+        {
+            await this.classesService.DeleteAsync(Id);
+
+            return this.RedirectToAction("Index");
+        }
     }
 }
