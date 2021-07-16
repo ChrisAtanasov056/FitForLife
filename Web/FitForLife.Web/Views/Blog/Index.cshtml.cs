@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FitForLife.Views.Blog
 {
-    public class AllModel : PageModel
+    public class Index : PageModel
     {
         public void OnGet()
         {

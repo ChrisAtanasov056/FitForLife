@@ -57,7 +57,7 @@ namespace FitForLife
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel)
+            AutoMapperConfig.RegisterMappings(Assembly.Load("FitForLife.Web.ViewModels"),typeof(ErrorViewModel)
                 .GetTypeInfo()
                 .Assembly);
             

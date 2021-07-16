@@ -5,11 +5,10 @@
     using System.ComponentModel.DataAnnotations;
     using FitForLife.Data.Common.Models;
 
-    public class Class : BaseDeletableModel<string>
+    public class Class : BaseDeletableModel<int>
     {
         public Class()
         {
-            this.Id = Guid.NewGuid().ToString();
             this.Clients = new HashSet<FitForLifeUser>();
         }
 
@@ -17,8 +16,10 @@
         [MaxLength(40)]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
+        [Required]
         public string PictureUrl { get; set; }
 
         public int MaxClients { get; set; }

@@ -1,5 +1,3 @@
-using System;
-
 namespace FitForLife.Models
 {
     public class ErrorViewModel

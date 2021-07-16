@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using FitForLife.Data.Common.Repositories;
     using FitForLife.Data.Models;
     using FitForLife.Services.Mapping;
@@ -18,14 +17,25 @@
             this.classesRepository = classesRepository;
         }
 
-        public Task AddAsync(string name, string description, string imageUrl)
+        public async Task AddAsync(string name, string description, string pictureUrl)
         {
-            throw new System.NotImplementedException();
+            await this.classesRepository.AddAsync(new Class
+            {
+                Name = name,
+                Description = description,
+                PictureUrl = pictureUrl,
+            });
+            await this.classesRepository.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var classes = await this.classesRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            this.classesRepository.Delete(classes);
+            await this.classesRepository.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(int? count = null)
@@ -42,9 +52,14 @@
             return await query.To<T>().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync<T>(int id)
+        public async Task<T> GetByIdAsync<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var classes = await this.classesRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefaultAsync();
+            return classes;
         }
+
     }
 }

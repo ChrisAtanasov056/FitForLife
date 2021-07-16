@@ -5,6 +5,8 @@
         public const string AdministratorRoleName = "Administrator";
 
         public const string TrainerRoleName = "Trainer";
+
+        public const string SystemName = "Fit4Life";
         
         
         public static class AccountsSeeding
