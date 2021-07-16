@@ -1,0 +1,40 @@
+﻿@model FitForLife.Web.ViewModels.Classes.AllClassesViewModel
+@{ this.ViewData["Title"] = "Classes"; }
+
+<h2>
+    All Classes (@Model.Classes.Count())
+    <span>
+        <a class="btn btn-info" asp-area="Administration" asp-controller="Classes" asp-action="AddClasses">Add New Class</a>
+    </span>
+</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Description</th>
+            <th scope="col">Delete Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var classView in this.Model.Classes)
+        {
+<tr>
+    <th scope="row">@classView.Name</th>
+    <td>
+        <img class="align-self-center" src="@classView.PictureUrl" style="width:180px;height:120px;">
+    </td>
+    <td>@classView.Description</td>
+    <td>
+        <form method="post">
+            <button type="submit" class="btn btn-danger btn-sm"
+                    asp-area="Administration" asp-controller="Classes" asp-action="DeleteClass" asp-route-id="@classView.Id">
+                Delete
+            </button>
+        </form>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
