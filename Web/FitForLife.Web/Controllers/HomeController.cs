@@ -1,4 +1,6 @@
 ﻿using FitForLife.Models;
+using FitForLife.Services.Data.Classes;
+using FitForLife.Web.ViewModels.Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,17 +12,24 @@ using System.Threading.Tasks;
 namespace FitForLife.Controllers
 {
     public class HomeController : Controller
+        
     {
+        private readonly IClassesService classesService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IClassesService classesService)
         {
             _logger = logger;
+            this.classesService = classesService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var viewModel = new AllClassesViewModel
+            {
+                Classes = await this.classesService.GetAllAsync<ClassViewModel>()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

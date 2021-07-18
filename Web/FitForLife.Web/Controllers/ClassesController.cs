@@ -17,20 +17,6 @@
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //var classes = dbContext
-            //    .Classes
-            //    .Select(c => new ClassViewModel
-            //    {
-            //        Name = c.Name,
-            //        Description = c.Description,
-            //        PictureUrl = c.PictureUrl,
-            //    }).ToList();
-            //var viewModel = new AllClassesViewModel();
-            //foreach (var item in classes)
-            //{
-            //    viewModel.Classes.Add(item);
-            //}
-            //ViewBag.AllClasses = viewModel.Classes;
             var viewModel = new AllClassesViewModel
             {
                 Classes = await this.classesService.GetAllAsync<ClassViewModel>()

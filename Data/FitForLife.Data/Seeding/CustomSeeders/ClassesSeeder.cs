@@ -19,7 +19,7 @@ namespace FitForLife.Data.Seeding.CustomSeeders
                 {
                     Name = "Bodybuilding",
                     Description = "Bodybuilding, a regimen of exercises designed to enhance the human body's muscular development and promote general health and fitness. As a competitive activity, bodybuilding aims to display in artistic fashion pronounced muscle mass, symmetry, and definition for overall aesthetic effect.",
-                    PictureUrl = "https://ae01.alicdn.com/kf/HTB1h0iianjxK1Rjy0Fnq6yBaFXaF.jpg",
+                    PictureUrl = "https://manofmany.com/wp-content/uploads/2021/02/Bodybuilding-Supplement-Stacks-1200x800.jpg",
                 },
                 new Class
                 {

@@ -4,6 +4,6 @@
 
     public class AllClassesViewModel
     {
-        public IEnumerable<ClassViewModel> Classes { get; set; }
+        public List<ClassViewModel> Classes { get; set; } = new List<ClassViewModel>();
     }
 }

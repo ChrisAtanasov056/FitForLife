@@ -38,7 +38,7 @@
             await this.classesRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>(int? count = null)
+        public async Task<List<T>> GetAllAsync<T>(int? count = null)
         {
             IQueryable<Class> query =
                 this.classesRepository

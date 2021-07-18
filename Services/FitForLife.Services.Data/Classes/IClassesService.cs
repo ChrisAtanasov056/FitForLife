@@ -5,7 +5,7 @@
 
     public interface IClassesService
     {
-        Task<IEnumerable<T>> GetAllAsync<T>(int? count = null);
+        Task<List<T>> GetAllAsync<T>(int? count = null);
 
         Task<T> GetByIdAsync<T>(int id);
 
