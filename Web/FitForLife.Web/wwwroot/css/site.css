@@ -1,6 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+#homeHeader {
+    
+    height: 1000px !important;
+    background: url(https://fitnessfor10.com/wp-content/uploads/2019/05/Fitness-for-10-Home-Licensing-Information.jpg) center center no-repeat;
+    background-size: cover !important;
+}
+#headers {
+    background: url(http://myaroundtheclockfitness.com/wp-content/uploads/2017/06/ATC-Fitness-Mobile-Fitness-Classes.jpg) center center;
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -70,12 +79,7 @@ html {
 }
 
 body {
-
-    background-image: url("../img/834269.jpg");
-    background-size: cover;
-    background-position: center;
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    background-image: url("../img/834269.jpg");*/
 }
 .footer {
   position: absolute;

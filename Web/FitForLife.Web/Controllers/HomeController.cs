@@ -25,9 +25,9 @@ namespace FitForLife.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var viewModel = new AllClassesViewModel
+            var viewModel = new HomeAllClassViewModel
             {
-                Classes = await this.classesService.GetAllAsync<ClassViewModel>()
+                Classes = await this.classesService.GetAllAsync<HomeClassViewModel>()
             };
             return View(viewModel);
         }
