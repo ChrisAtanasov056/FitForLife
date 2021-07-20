@@ -48,12 +48,6 @@
                 .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
 
             builder
-                .Entity<Card>()
-                .HasOne(c => c.User)
-                .WithOne(u => u.Card)
-                .HasForeignKey<FitForLifeUser>(u => u.CardId);
-
-            builder
                 .Entity<ClientTrainer>()
                 .HasOne(ct => ct.Client)
                 .WithMany(c => c.Trainers)
@@ -70,6 +64,7 @@
             builder
                 .Entity<ClientTrainer>()
                 .HasKey(k => new { k.ClientId, k.TrainerId });
+            
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

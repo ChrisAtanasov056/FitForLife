@@ -23,5 +23,17 @@
             };
             return this.View(viewModel);
         }
+        
+        public async Task<IActionResult> Details(int Id)
+        {
+            var viewModel = await this.classesService.GetByIdAsync<DetailsClassViewModel>(Id);
+
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.View(viewModel);
+            }
+            return Redirect("/Identity/Account/Login");
+            
+        }
     }
 }

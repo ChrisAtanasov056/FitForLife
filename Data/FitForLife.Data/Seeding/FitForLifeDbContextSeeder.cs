@@ -26,7 +26,9 @@
                           {
                               new RolesSeeder(),
                               new ClassesSeeder(),
-                              new AccountsSeeder()
+                              new AccountsSeeder(),
+                              new CardsSeeder(),
+                              new BlogsSeeder()
                           };
 
             foreach (var seeder in seeders)

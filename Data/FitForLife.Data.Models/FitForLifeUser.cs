@@ -29,9 +29,10 @@
 
         public string Description { get; set; }
 
-        public string CardId { get; set; }
+        public int? CardId { get; set; }
         
         public Card Card { get; set; }
+
         // Audit Info
         public DateTime CreatedOn { get; set; }
 

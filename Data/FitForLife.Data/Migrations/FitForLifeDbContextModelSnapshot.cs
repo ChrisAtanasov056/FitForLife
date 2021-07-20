@@ -45,8 +45,10 @@ namespace FitForLife.Data.Migrations
 
             modelBuilder.Entity("FitForLife.Data.Models.Card", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -60,13 +62,12 @@ namespace FitForLife.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PictureUrl")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Visits")
                         .HasColumnType("int");
@@ -220,8 +221,8 @@ namespace FitForLife.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("CardId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("CardId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ClassId")
                         .HasColumnType("int");
@@ -298,9 +299,7 @@ namespace FitForLife.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CardId")
-                        .IsUnique()
-                        .HasFilter("[CardId] IS NOT NULL");
+                    b.HasIndex("CardId");
 
                     b.HasIndex("ClassId");
 
@@ -517,8 +516,8 @@ namespace FitForLife.Data.Migrations
             modelBuilder.Entity("FitForLife.Data.Models.FitForLifeUser", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.Card", "Card")
-                        .WithOne("User")
-                        .HasForeignKey("FitForLife.Data.Models.FitForLifeUser", "CardId");
+                        .WithMany("Users")
+                        .HasForeignKey("CardId");
 
                     b.HasOne("FitForLife.Data.Models.Class", null)
                         .WithMany("Clients")
@@ -598,7 +597,7 @@ namespace FitForLife.Data.Migrations
 
             modelBuilder.Entity("FitForLife.Data.Models.Card", b =>
                 {
-                    b.Navigation("User");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Class", b =>

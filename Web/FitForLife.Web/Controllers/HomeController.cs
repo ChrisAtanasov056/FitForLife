@@ -1,6 +1,9 @@
 ﻿using FitForLife.Models;
+using FitForLife.Services.Data.Cards;
 using FitForLife.Services.Data.Classes;
+using FitForLife.Web.ViewModels.Cards;
 using FitForLife.Web.ViewModels.Classes;
+using FitForLife.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,21 +18,32 @@ namespace FitForLife.Controllers
         
     {
         private readonly IClassesService classesService;
+        private readonly ICardsService cardsService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IClassesService classesService)
+        public HomeController(ILogger<HomeController> logger, IClassesService classesService, ICardsService cardsService)
         {
             _logger = logger;
             this.classesService = classesService;
+            this.cardsService = cardsService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var viewModel = new HomeAllClassViewModel
+            var classViewModel = new HomeAllClassViewModel
             {
                 Classes = await this.classesService.GetAllAsync<HomeClassViewModel>()
             };
-            return View(viewModel);
+            var cardsViewModel = new AllCardsViewModel
+            {
+                Cards = await this.cardsService.GetAllAsync<CardsViewModel>()
+            };
+            var allView = new HomeViewModels
+            {
+                Cards = cardsViewModel,
+                Classes = classViewModel,
+            };
+            return View(allView);
         }
 
         public IActionResult Privacy()
