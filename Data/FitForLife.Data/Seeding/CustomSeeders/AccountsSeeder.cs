@@ -31,6 +31,25 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.TrainerEmail,
                 GlobalConstants.TrainerRoleName);
+            // Create Kango Trainer
+            await CreateUser(
+                userManager,
+                roleManager,
+                GlobalConstants.AccountsSeeding.KangoEmail,
+                GlobalConstants.TrainerRoleName);
+            // Create Zumba Trainer
+            await CreateUser(
+                userManager,
+                roleManager,
+                GlobalConstants.AccountsSeeding.ZumbaEmail,
+                GlobalConstants.TrainerRoleName);
+            // Create Pilates Trainer
+            await CreateUser(
+                userManager,
+                roleManager,
+                GlobalConstants.AccountsSeeding.PilatesEmail,
+                GlobalConstants.TrainerRoleName);
+
         }
         private static async Task CreateUser(
             UserManager<FitForLifeUser> userManager, RoleManager<FitForLifeRole> roleManager, string email, string roleName = null)

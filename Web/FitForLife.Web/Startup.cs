@@ -9,6 +9,7 @@ namespace FitForLife
     using FitForLife.Models;
     using FitForLife.Services.Data.Cards;
     using FitForLife.Services.Data.Classes;
+    using FitForLife.Services.Data.Users;
     using FitForLife.Services.Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -54,6 +55,7 @@ namespace FitForLife
             //App Services
             services.AddTransient<IClassesService, ClassesService>();
             services.AddTransient<ICardsService, CardsServices>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
