@@ -17,6 +17,12 @@
 
             public const string TrainerEmail = "trainer@trainer.com";
 
+            public const string PilatesEmail = "pilates@trainer.com";
+
+            public const string KangoEmail = "kango@trainer.com";
+
+            public const string ZumbaEmail = "zumba@trainer.com";
+
             public const string UserEmail = "user@user.com";
         }
 

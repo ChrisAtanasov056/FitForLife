@@ -24,14 +24,27 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Identity\Account\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Data\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\FitForLife.Data\FitForLife.Data.csproj" />
     <ProjectReference Include="..\..\Services\FitForLife.Services.Data\FitForLife.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\FitForLife.Services.Mapping\FitForLife.Services.Mapping.csproj" />
     <ProjectReference Include="..\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\bootstrap\" />
+    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+    <Folder Include="wwwroot\lib\jquery-validation\" />
+    <Folder Include="wwwroot\lib\jquery-validation\dist\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+    <Folder Include="wwwroot\lib\jquery\dist\" />
   </ItemGroup>
 
 </Project>
