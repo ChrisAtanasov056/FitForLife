@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using FitForLife.Data.Models;
-using FitForLife.Services.Data.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace FitForLife.Areas.Identity.Pages.Account.Manage
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.Threading.Tasks;
+    using FitForLife.Data.Models;
+    using FitForLife.Services.Data.Users;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<FitForLifeUser> _userManager;
@@ -47,6 +43,7 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             [MaxLength(30)]
             public string LastName { get; set; }
 
+            public string ProfilePicUrl { get; set; }
         }
 
         private async Task LoadAsync(FitForLifeUser user)
@@ -61,6 +58,7 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
                 PhoneNumber = phoneNumber,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                ProfilePicUrl =user.ProfilePictureUrl
             };
         }
 
@@ -76,6 +74,7 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             this.Input.FirstName = user.FirstName;
             this.Input.LastName = user.LastName;
             this.Input.PhoneNumber = user.PhoneNumber;
+            this.Input.ProfilePicUrl = user.ProfilePictureUrl;
             return Page();
         }
 

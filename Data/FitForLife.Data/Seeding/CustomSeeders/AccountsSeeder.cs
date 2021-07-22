@@ -24,7 +24,6 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.AdminEmail,
                 GlobalConstants.AdministratorRoleName);
-           
             // Create Trainer
             await CreateUser(
                 userManager,
@@ -49,6 +48,11 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.PilatesEmail,
                 GlobalConstants.TrainerRoleName);
+            // Create User 
+            await CreateUser(
+                userManager,
+                roleManager,
+                GlobalConstants.AccountsSeeding.UserEmail);
 
         }
         private static async Task CreateUser(
@@ -58,6 +62,7 @@
             {
                 UserName = email,
                 Email = email,
+                ProfilePictureUrl = "https://i1.wp.com/norrismgmt.com/wp-content/uploads/2020/05/24-248253_user-profile-default-image-png-clipart-png-download.png"
             };
 
             var password = GlobalConstants.AccountsSeeding.Password;
@@ -66,7 +71,7 @@
             {
                 var role = await roleManager.FindByNameAsync(roleName);
 
-                if (!userManager.Users.Any(x => x.Roles.Any(x => x.RoleId == role.Id)))
+                if (userManager.Users.Any(x => x.UserName != user.UserName))
                 {
                     var result = await userManager.CreateAsync(user, password);
 

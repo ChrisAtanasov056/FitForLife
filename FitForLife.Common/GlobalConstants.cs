@@ -6,6 +6,8 @@
 
         public const string TrainerRoleName = "Trainer";
 
+        public const string UserRoleName = "User";
+
         public const string SystemName = "Fit4Life";
         
         
