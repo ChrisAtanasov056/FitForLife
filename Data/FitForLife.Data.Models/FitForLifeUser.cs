@@ -25,6 +25,10 @@
         [MaxLength(30)]
         public string LastName { get; set; }
 
+        public int Age { get; set; }
+
+        public string City { get; set; }
+
         public string ProfilePictureUrl { get; set; }
 
         public string Description { get; set; }

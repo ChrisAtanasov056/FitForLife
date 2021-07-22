@@ -23,6 +23,9 @@ for details on configuring this project to bundle and minify static web assets. 
 #login{
     margin-top: 100px
 }
+#marginTop {
+    margin-top: 70px;
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;

@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\FitForLife.Data.Common\FitForLife.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
+    <ProjectReference Include="..\..\FitForLife.Common\FitForLife.Common.csproj" />
     <ProjectReference Include="..\..\Web\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj" />
     <ProjectReference Include="..\FitForLife.Services.Mapping\FitForLife.Services.Mapping.csproj" />
   </ItemGroup>

@@ -9,8 +9,8 @@
         public const string UserRoleName = "User";
 
         public const string SystemName = "Fit4Life";
-        
-        
+
+
         public static class AccountsSeeding
         {
             public const string Password = "123456";
@@ -26,9 +26,9 @@
             public const string ZumbaEmail = "zumba@trainer.com";
 
             public const string UserEmail = "user@user.com";
-        }
 
-        
+
+        }
     }
     
 }
