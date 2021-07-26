@@ -32,7 +32,13 @@ a.navbar-brand {
     word-break: break-all;
     margin-left: 50px !important;
 }
-
+#trainerView {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 200;
+    color: snow;
+    text-decoration: solid;
+    text-align: center;
+}
 .footer-text {
     color: white;
     font-size: 20px;
@@ -119,10 +125,12 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-
+#homeCardClasses{
+    image-resolution: 300dpi;
+}
 /* Home Carossel*/
-#carouselExampleIndicatorsm {
-    height: 100vh;
+#carouselExampleIndicators {
+    height: 100px;
     min-height: 300px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;
@@ -148,6 +156,40 @@ body {
         font-size: 18px;
         line-height: 1.9;
     }
+.fadedfx {
+    background-color: #fe5652;
+    visibility: hidden;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    visibility: visible !important;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 /* pricing tables */
 .pricing-table {
     background: #e9f0f4;

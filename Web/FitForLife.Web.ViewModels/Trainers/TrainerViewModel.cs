@@ -17,5 +17,7 @@ namespace FitForLife.Web.ViewModels.Trainers
         public string ProfilePictureUrl { get; set; }
 
         public string Description { get; set; }
+
+        public Class Class { get; set; }
     }
 }

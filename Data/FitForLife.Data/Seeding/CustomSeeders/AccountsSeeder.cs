@@ -24,14 +24,19 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.AdminEmail,
                 "Kristiyan", "Atanasov",
+                null,
+                null,
             GlobalConstants.AdministratorRoleName);
                 
-            // Create Trainer
+            // Create Bodybuiling Trainer
             await CreateUser(
                 userManager,
                 roleManager,
                 GlobalConstants.AccountsSeeding.TrainerEmail,
                 "Ivan", "Ivanov",
+                dbContext.Classes.FirstOrDefault(c => c.Name == "Bodybuilding"),
+                GlobalConstants.AccountsSeeding.BodybuilingTrainerPic,
+                GlobalConstants.AccountsSeeding.BodybuilingDescription,
                 GlobalConstants.TrainerRoleName);
             // Create Kango Trainer
             await CreateUser(
@@ -39,6 +44,9 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.KangoEmail,
                 "Jenny", "Dryanovska",
+                dbContext.Classes.FirstOrDefault(c => c.Name == "Kango Jumps"),
+                GlobalConstants.AccountsSeeding.KangoTrainerPic,
+                GlobalConstants.AccountsSeeding.KangoDescription,
                 GlobalConstants.TrainerRoleName);
             // Create Zumba Trainer
             await CreateUser(
@@ -46,28 +54,48 @@
                 roleManager,
                 GlobalConstants.AccountsSeeding.ZumbaEmail,
                 "Petya", "Marinova",
+                dbContext.Classes.FirstOrDefault(c => c.Name == "Zumba"),
+                GlobalConstants.AccountsSeeding.ZumbaTrainerPic,
+                GlobalConstants.AccountsSeeding.ZumbaDescription,
                 GlobalConstants.TrainerRoleName);
             // Create Pilates Trainer
             await CreateUser(
                 userManager,
                 roleManager,
                 GlobalConstants.AccountsSeeding.PilatesEmail,
-                "Petya", "Marinova",
+                "Maria", "Petrova",
+                dbContext.Classes.FirstOrDefault(c => c.Name == "Pilates"),
+                GlobalConstants.AccountsSeeding.PilatesTrainerPic,
+                GlobalConstants.AccountsSeeding.PitalatesDescription,
+                GlobalConstants.TrainerRoleName
+                );
+            // Create Pilates Trainer
+            await CreateUser(
+                userManager,
+                roleManager,
+                GlobalConstants.AccountsSeeding.YogaEmail,
+                "Alis", "Nikolova",
+                dbContext.Classes.FirstOrDefault(c => c.Name == "Yoga"),
+                GlobalConstants.AccountsSeeding.YogaTrainerPic,
+                GlobalConstants.AccountsSeeding.YogaDescription,
                 GlobalConstants.TrainerRoleName
                 );
 
         }
         private static async Task CreateUser(
-            UserManager<FitForLifeUser> userManager, RoleManager<FitForLifeRole> roleManager, string email, string FirstName, string LastName,string roleName = null)
+            UserManager<FitForLifeUser> userManager, RoleManager<FitForLifeRole> roleManager, string email, string FirstName, string LastName, Class @class, string picUrl, string description ,string roleName = null)
         {
             var user = new FitForLifeUser
             {
                 UserName = email,
                 Email = email,
-                ProfilePictureUrl = "https://i1.wp.com/norrismgmt.com/wp-content/uploads/2020/05/24-248253_user-profile-default-image-png-clipart-png-download.png",
+                ProfilePictureUrl = picUrl,
                 FirstName = FirstName,
-                LastName = LastName
+                LastName = LastName,
+                Class = @class,
+                Description = description
             };
+
 
             var password = GlobalConstants.AccountsSeeding.Password;
 
@@ -75,7 +103,7 @@
             {
                 var role = await roleManager.FindByNameAsync(roleName);
 
-                if (userManager.Users.Any(x => x.UserName != user.UserName))
+                if (!userManager.Users.Any(x => x.UserName == user.UserName))
                 {
                     var result = await userManager.CreateAsync(user, password);
 

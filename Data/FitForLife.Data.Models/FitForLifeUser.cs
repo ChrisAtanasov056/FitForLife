@@ -37,6 +37,10 @@
         
         public Card Card { get; set; }
 
+        public int? ClassId { get; set; }
+
+        public Class Class { get; set; }
+
         // Audit Info
         public DateTime CreatedOn { get; set; }
 

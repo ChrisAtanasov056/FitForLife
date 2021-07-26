@@ -16,9 +16,9 @@
             </main>
         </div>
 
-        <footer class="border-top footer text-muted">
+        <footer class="footer border-top">
             <div class="container">
-                &copy; 2021 - FitForLife - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                &copy; @DateTime.Now.Year - FitForLife - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -27,5 +27,5 @@
         @await RenderSectionAsync("Scripts", required: false)
     </div>
 </body>
-
 </html>
+
