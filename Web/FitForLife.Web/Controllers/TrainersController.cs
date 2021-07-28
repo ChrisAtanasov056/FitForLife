@@ -21,6 +21,10 @@
             {
                 Trainers = await this.trainersService.GetAllTrainersAsync<TrainerViewModel>()
             };
+            if (viewModel == null)
+            {
+                return new StatusCodeResult(404);
+            }
             return this.View(viewModel);
         }
     }

@@ -41,11 +41,11 @@
     </a>
 </div>
 <section id="gallery">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             @foreach (var classView in @Model.Classes.Classes)
             {
-                <div class="col-lg-3">
+                <div class="col-sm-6">
                     <div class="card h-100">
                         <img src="@classView.PictureUrl" alt="" class="card-img-top">
                         <div class="card-body">
@@ -81,8 +81,8 @@
                                 </p>
                             </div>
                             <div class="pricing-table-content">
-                                <div class="pricing-table-button">
-                                    <a href="#x" class="btn btn-info"><span>Become a Member</span></a>
+                                <div id="BecomeMemberButton">
+                                    <a asp-action="Index" asp-controller="Cards">Become a Member</a>
                                 </div><!-- / pricing-table-button -->
                             </div><!-- / pricing-table-content -->
                         </div><!-- / pricing-table -->

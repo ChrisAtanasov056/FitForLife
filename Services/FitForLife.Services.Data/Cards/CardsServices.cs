@@ -22,9 +22,15 @@
             throw new System.NotImplementedException();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var card =
+                await this.cardRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            this.cardRepository.Delete(card);
+            await this.cardRepository.SaveChangesAsync();
         }
 
         public async Task<List<T>> GetAllAsync<T>(int? count = null)
@@ -41,9 +47,14 @@
             return await query.To<T>().ToListAsync();
         }
 
-        public Task<T> GetByIdAsync<T>(int id)
+        public async Task<T> GetByIdAsync<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var card =
+                await this.cardRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefaultAsync();
+            return card;
         }
     }
 }

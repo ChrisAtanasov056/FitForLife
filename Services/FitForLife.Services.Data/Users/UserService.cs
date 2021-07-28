@@ -3,6 +3,7 @@
     using FitForLife.Data.Common.Repositories;
     using FitForLife.Data.Models;
     using FitForLife.Services.Mapping;
+    using FitForLife.Web.ViewModels;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,10 +12,30 @@
     public class UserService : IUserService
     {
         private readonly IDeletableEntityRepository<FitForLifeUser> users;
+        private readonly IDeletableEntityRepository<Card> cardsRepository;
 
-        public UserService(IDeletableEntityRepository<FitForLifeUser> users)
+        public UserService(IDeletableEntityRepository<FitForLifeUser> users, IDeletableEntityRepository<Card> cardsRepository)
         {
             this.users = users;
+            this.cardsRepository = cardsRepository;
+        }
+
+        public async Task<FitForLifeUser> AddCardToUser(string userId, int cardId)
+        {
+            var curUser = users.All()
+                .Where(x => x.Id == userId)
+                .FirstOrDefault();
+            if (curUser.CardId != null)
+            {
+                return curUser;
+            }
+            var curCard = cardsRepository
+                .All()
+                .Where(x => x.Id == cardId)
+                .FirstOrDefault();
+            curUser.Card = curCard;
+            await users.SaveChangesAsync();
+            return curUser;
         }
 
         public async Task<FitForLifeUser> ChangeEmailAsync(string userId, string newEmail)

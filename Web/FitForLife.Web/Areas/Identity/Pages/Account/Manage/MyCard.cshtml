@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.MyCard;
+}
+@if (Model.Input.Card != null)
+{
+    
+    <div  class="card" style="width: 18rem; background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
+        <img src="@Model.Input.ProfilePicUrl" class="img-fluid border-white border-w-5 w-50 w-md-80 w-lg-60 rounded-circle" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Input.FirstName @Model.Input.LastName</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush" style="background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
+            <li class="list-group-item">Start Date:@Model.Input.Card.CreatedOn</li>
+            <li class="list-group-item">Visits: @Model.Input.Card.Visits</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="btn btn-primary ">Find Class</a>
+        </div>
+    </div>
+}
+@if (Model.Input.Card == null)
+{
+     BadRequest();
+}

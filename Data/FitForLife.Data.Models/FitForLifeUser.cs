@@ -35,11 +35,11 @@
 
         public int? CardId { get; set; }
         
-        public Card Card { get; set; }
+        public virtual Card Card { get; set; }
 
         public int? ClassId { get; set; }
 
-        public Class Class { get; set; }
+        public virtual Class Class { get; set; }
 
         // Audit Info
         public DateTime CreatedOn { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace FitForLife.Services.Data.Cards
 {
+    using FitForLife.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -12,5 +13,6 @@
         Task AddAsync(string name, decimal price, int visits);
 
         Task DeleteAsync(int id);
+
     }
 }

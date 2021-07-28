@@ -64,7 +64,6 @@
             builder
                 .Entity<ClientTrainer>()
                 .HasKey(k => new { k.ClientId, k.TrainerId });
-            
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

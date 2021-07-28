@@ -56,5 +56,17 @@ namespace FitForLife.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Route("/Home/Error/{code:int}")]
+        public IActionResult Error(int code)
+        {
+            // Could handle different codes here
+            // or just return the default error view
+            return this.View();
+        }
+        [Route("/Home/Error/404")]
+        public IActionResult Error404()
+        {
+            return this.View();
+        }
     }
 }

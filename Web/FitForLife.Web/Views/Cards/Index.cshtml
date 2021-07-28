@@ -1,0 +1,124 @@
+﻿@model FitForLife.Web.ViewModels.Cards.AllCardsViewModel
+@{
+    this.ViewData["Title"] = "Cards";
+}
+<<div class="pricing4 py-5">
+    <div class="container">
+        <!-- Row  -->
+        <div class="row m-4 justify-content-center">
+            <div class="col-md-8 text-center">
+                <h3 class="mb-3">Extra ordinary Pricing for your Fitness</h3>
+                <h6 class="subtitle font-weight-normal">You can relay on our amazing features list and also our customer services will be great experience for you without doubt</h6>
+            </div>
+        </div>
+        <!-- Row  -->
+        <div class="row mt-2">
+            <!-- Column -->
+            <div class="col-md-6">
+                <div class="card card-shadow border-0 mb-4">
+                    <img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/pricing/img1.jpg" alt="wrappixel kit">
+                    <div class="p-3">
+                        <h5 class="font-weight-medium mb-0">@Model.Cards[0].Name</h5>
+                        <h6 class="subtitle font-13">@Model.Cards[0].Visits</h6>
+                        <ul class="list-inline font-14 mt-3">
+                            <li class="py-1"><i class="icon-check text-success"></i> One Time Visit </li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Dedicated Trainer Allocated</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Diet Plan Included</li>
+                        </ul>
+                        <div class="d-flex mt-3 align-items-center">
+                            <h2 class="price">$@Model.Cards[0].Price</h2>
+                            <div class="ml-auto">
+                                <form asp-action="BuyCard" asp-controller="Cards" method="post">
+                                    <input type="text" name="CardId" value="@Model.Cards[0].Id" hidden />
+                                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                                        Buy Now!
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6">
+                <div class="card card-shadow border-0 mb-4">
+                    <img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/pricing/img2.jpg" alt="wrappixel kit">
+                    <div class="p-3">
+                        <h5 class="font-weight-medium mb-0">@Model.Cards[1].Name</h5>
+                        <h6 class="subtitle font-13">@Model.Cards[1].Visits <small>Visits</small></h6>
+                        <ul class="list-inline font-14 mt-3">
+                            <li class="py-1"><i class="icon-check text-success"></i> 10 Visits </li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Dedicated Trainer Allocated</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Diet Plan Included</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Morning and Evening Batches</li>
+                        </ul>
+                        <div class="d-flex mt-3 align-items-center">
+                            <h2 class="price">$@Model.Cards[1].Price</h2>
+                            <div class="ml-auto">
+                                <form asp-action="BuyCard" asp-controller="Cards" method="post">
+                                    <input type="text" name="CardId" value="@Model.Cards[1].Id" hidden />
+                                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                                        Buy Now!
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="col-md-6">
+                <div class="card card-shadow border-0 mb-4">
+                    <img class="card-img-top" src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/pricing/img3.jpg" alt="wrappixel kit">
+                    <div class="p-3">
+                        <h5 class="font-weight-medium mb-0">@Model.Cards[2].Name</h5>
+                        <h6 class="subtitle font-13">@Model.Cards[2].Price <small>Visits</small></h6>
+                        <ul class="list-inline font-14 mt-3">
+                            <li class="py-1"><i class="icon-check text-success"></i> 20 Visits </li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Dedicated Trainer Allocated</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Diet Plan Included</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Morning and Evening Batches</li>
+                        </ul>
+                        <div class="d-flex mt-3 align-items-center">
+                            <h2 class="price">$@Model.Cards[2].Price</h2>
+                            <div class="ml-auto">
+                                <form asp-action="BuyCard" asp-controller="Cards" method="post">
+                                    <input type="text" name="CardId" value="@Model.Cards[2].Id" hidden />
+                                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                                        Buy Now!
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-shadow border-0 mb-4">
+                    <img class="card-img-top" src="https://topshopbg.azureedge.net/media/wysiwyg/mag-wellneo/product-description/Fit_U_Pants/Fit_U_Pants_12.jpg" alt="wrappixel kit">
+                    <div class="p-3">
+                        <h5 class="font-weight-medium mb-0">@Model.Cards[3].Name</h5>
+                        <h6 class="subtitle font-13">@Model.Cards[3].Price <small>Visits</small></h6>
+                        <ul class="list-inline font-14 mt-3">
+                            <li class="py-1"><i class="icon-check text-success"></i> 30 Visits </li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Dedicated Trainer Allocated</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Diet Plan Included</li>
+                            <li class="py-1"><i class="icon-check text-success"></i> Morning and Evening Batches</li>
+                        </ul>
+                        <div class="d-flex mt-3 align-items-center">
+                            <h2 class="price">$@Model.Cards[3].Price</h2>
+                            <div class="ml-auto">
+                                <form asp-action="BuyCard" asp-controller="Cards" method="post">
+                                    <input type="text" name="CardId" value="@Model.Cards[3].Id" hidden />
+                                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                                        Buy Now!
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
