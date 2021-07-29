@@ -9,7 +9,8 @@
     {
         public Class()
         {
-            this.Clients = new HashSet<FitForLifeUser>();
+            this.Trainers = new HashSet<FitForLifeUser>();
+            this.Events = new HashSet<Event>();
         }
 
         [Required]
@@ -22,9 +23,8 @@
         [Required]
         public string PictureUrl { get; set; }
 
-        public int MaxClients { get; set; }
+        public ICollection<FitForLifeUser> Trainers { get; set; }
 
-        public ICollection<FitForLifeUser> Clients { get; set; }
-
+        public ICollection<Event> Events { get; set; }
     }
 }

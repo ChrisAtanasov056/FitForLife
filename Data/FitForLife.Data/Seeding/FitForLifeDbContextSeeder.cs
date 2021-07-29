@@ -28,7 +28,8 @@
                               new ClassesSeeder(),
                               new AccountsSeeder(),
                               new CardsSeeder(),
-                              new BlogsSeeder()
+                              new BlogsSeeder(),
+                              new EventsSeeder()
                           };
 
             foreach (var seeder in seeders)

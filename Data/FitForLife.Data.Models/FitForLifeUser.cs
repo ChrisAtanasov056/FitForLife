@@ -17,6 +17,7 @@
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Appointments = new HashSet<Appointment>();
         }
        
         [MaxLength(30)]
@@ -52,6 +53,8 @@
         public bool IsDeleted { get; set; }
 
         public ICollection<ClientTrainer> Trainers { get; set; }
+
+        public ICollection<Appointment> Appointments { get; set; }
         
         public  ICollection<ClientTrainer> Clients { get; set; }
 

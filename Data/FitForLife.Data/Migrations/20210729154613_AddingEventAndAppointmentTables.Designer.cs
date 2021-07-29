@@ -4,14 +4,16 @@ using FitForLife.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitForLife.Data.Migrations
 {
     [DbContext(typeof(FitForLifeDbContext))]
-    partial class FitForLifeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210729154613_AddingEventAndAppointmentTables")]
+    partial class AddingEventAndAppointmentTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,6 +122,9 @@ namespace FitForLife.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("MaxClients")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -616,7 +621,7 @@ namespace FitForLife.Data.Migrations
                         .HasForeignKey("CardId");
 
                     b.HasOne("FitForLife.Data.Models.Class", "Class")
-                        .WithMany("Trainers")
+                        .WithMany("Clients")
                         .HasForeignKey("ClassId");
 
                     b.Navigation("Card");
@@ -700,9 +705,9 @@ namespace FitForLife.Data.Migrations
 
             modelBuilder.Entity("FitForLife.Data.Models.Class", b =>
                 {
-                    b.Navigation("Events");
+                    b.Navigation("Clients");
 
-                    b.Navigation("Trainers");
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Event", b =>

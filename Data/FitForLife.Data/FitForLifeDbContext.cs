@@ -27,6 +27,8 @@
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public DbSet<TrainingDay> TrainingDays { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -64,6 +66,9 @@
             builder
                 .Entity<ClientTrainer>()
                 .HasKey(k => new { k.ClientId, k.TrainerId });
+            builder
+                .Entity<Appointment>()
+                .HasKey(k => new { k.EventId, k.UserId });
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
