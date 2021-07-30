@@ -1,0 +1,41 @@
+﻿@model FitForLife.Web.ViewModels.Events.EventViewModel
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Event</h1>
+        <div>
+            <div class="form-group text-center">
+                <img src="@Model.Class.PictureUrl" class="img-fluid">
+            </div>
+            <div class="form-group">
+                <label>Class</label>
+                <input type="text" readonly class="form-control" value="@Model.Class.Name">
+            </div>
+            <div class="form-group">
+                <label>Begining</label>
+                <input type="datetime" readonly class="form-control" value="@Model.StartEvent">
+            </div>
+            <div class="form-group">
+                <label>End</label>
+                <input type="datetime" readonly class="form-control" value="@Model.EndEvent">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" readonly class="form-control" value="@Model.Description">
+            </div>
+            <div class="form-group">
+                <label>Available Spots</label>
+                <input type="number" readonly class="form-control" value="@Model.AvailableSpots">
+            </div>
+            <div class="btn btn-info btn-lg">
+                <form asp-action="AddUserToEvent" asp-controller="Appointments" method="post">
+                    <input type="text" name="EventId" value="@Model.Id" hidden />
+                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                        Join!
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>

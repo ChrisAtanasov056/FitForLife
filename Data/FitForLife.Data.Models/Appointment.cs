@@ -6,11 +6,12 @@
 
     public class Appointment : IDeletableEntity
     {
+        [Key]
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public FitForLifeUser User { get; set; }
-
+        [Key]
         [Required]
         public int EventId { get; set; }
 

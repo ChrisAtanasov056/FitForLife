@@ -68,7 +68,7 @@
                 .HasKey(k => new { k.ClientId, k.TrainerId });
             builder
                 .Entity<Appointment>()
-                .HasKey(k => new { k.EventId, k.UserId });
+                .HasKey(k => new { k.UserId, k.EventId });
         }
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {

@@ -21,10 +21,10 @@ namespace FitForLife.Data.Migrations
 
             modelBuilder.Entity("FitForLife.Data.Models.Appointment", b =>
                 {
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -33,12 +33,9 @@ namespace FitForLife.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("UserId", "EventId");
 
-                    b.HasKey("EventId", "UserId");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("EventId");
 
                     b.ToTable("Appointments");
                 });
@@ -556,7 +553,9 @@ namespace FitForLife.Data.Migrations
 
                     b.HasOne("FitForLife.Data.Models.FitForLifeUser", "User")
                         .WithMany("Appointments")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Event");
 

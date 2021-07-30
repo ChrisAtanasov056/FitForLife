@@ -38,9 +38,8 @@ namespace FitForLife.Data.Migrations
                 name: "Appointments",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -48,8 +47,8 @@ namespace FitForLife.Data.Migrations
                 {
                     table.PrimaryKey("PK_Appointments", x => new { x.EventId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_Appointments_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Appointments_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -61,12 +60,7 @@ namespace FitForLife.Data.Migrations
                         onDelete: ReferentialAction.Restrict
                         );
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_UserId1",
-                table: "Appointments",
-                column: "UserId1");
-
+            
             migrationBuilder.CreateIndex(
                 name: "IX_Events_ClassId",
                 table: "Events",
