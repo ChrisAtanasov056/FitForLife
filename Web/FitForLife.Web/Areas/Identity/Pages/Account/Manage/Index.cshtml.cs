@@ -1,11 +1,15 @@
 namespace FitForLife.Areas.Identity.Pages.Account.Manage
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using FitForLife.Data.Models;
     using FitForLife.Services.Data.Cards;
+    using FitForLife.Services.Data.Events;
     using FitForLife.Services.Data.Users;
+    using FitForLife.Web.ViewModels.Appointment;
     using FitForLife.Web.ViewModels.Cards;
+    using FitForLife.Web.ViewModels.Events;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,16 +19,18 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<FitForLifeUser> _signInManager;
         private readonly IUserService userService;
         private readonly ICardsService cardsService;
+        private readonly IEventService eventService;
 
         public IndexModel(
             UserManager<FitForLifeUser> userManager,
             SignInManager<FitForLifeUser> signInManager,
-            IUserService userService, ICardsService cardsService)
+            IUserService userService, ICardsService cardsService, IEventService eventService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this.userService = userService;
             this.cardsService = cardsService;
+            this.eventService = eventService;
         }
 
         [TempData]
@@ -51,6 +57,8 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
 
             public int CardId { get; set; }
             public CardsViewModel Card { get; set; }
+
+            public List<AppointmentViewModel> Appointments { get; set; }
         }
 
         private async Task LoadAsync(FitForLifeUser user)
@@ -66,8 +74,13 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ProfilePicUrl =user.ProfilePictureUrl,
-                Card = card
+                Card = card,
+                Appointments = await userService.GetAllEventsOnUserAsync<AppointmentViewModel>(user.Id)
             };
+            foreach (var appointment in Input.Appointments)
+            {
+                appointment.Event = await eventService.GetByIdAsync<EventViewModel>(appointment.EventId);
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -85,6 +98,11 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             this.Input.PhoneNumber = user.PhoneNumber;
             this.Input.ProfilePicUrl = user.ProfilePictureUrl;
             this.Input.Card = card;
+            this.Input.Appointments = await userService.GetAllEventsOnUserAsync<AppointmentViewModel>(user.Id);
+            foreach (var appointment in Input.Appointments)
+            {
+                appointment.Event = await eventService.GetByIdAsync<EventViewModel>(appointment.EventId);
+            }
             return Page();
         }
 

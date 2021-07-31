@@ -33,6 +33,10 @@
                     .All()
                     .Where(x => x.Id == userId)
                     .FirstOrDefaultAsync();
+                if (!user.Appointments.Any(x=>x.EventId == eventId))
+                {
+                    return @event;
+                }
                 var appointment = new Appointment
                 {
                     EventId = eventId,
@@ -44,6 +48,7 @@
                 .FirstOrDefault();
                 user.Card = curCard;
                 user.Card.Visits -= 1;
+                @event.AvailableSpots -= 1;
                 user.Appointments.Add(appointment);
                 @event.Appointments.Add(appointment);
                 await eventRepository.SaveChangesAsync();
@@ -54,13 +59,14 @@
 
         public async Task<List<T>> GetAllEventsAsync<T>()
         {
-            var trainers = await this.eventRepository
+            var events = await this.eventRepository
                  .All()
                  .To<T>()
                  .ToListAsync();
 
-            return trainers;
+            return events;
         }
+        
         public async Task<T> GetByIdAsync<T>(int id)
         {
             var @event = await this.eventRepository

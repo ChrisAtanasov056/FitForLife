@@ -22,6 +22,24 @@
         </div>
     </div>
 }
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Begining</th>
+            <th scope="col">End</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model.Input.Appointments)
+        {
+            <tr>
+                <td>@appointment.Event.Class.Name</td>
+                <td>@appointment.Event.StartEvent</td>
+                <td>@appointment.Event.EndEvent</td>
+            </tr>
+        }    </tbody>
+</table>
 @if (Model.Input.Card == null)
 {
      BadRequest();

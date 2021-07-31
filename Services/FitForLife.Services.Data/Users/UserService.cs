@@ -13,11 +13,13 @@
     {
         private readonly IDeletableEntityRepository<FitForLifeUser> users;
         private readonly IDeletableEntityRepository<Card> cardsRepository;
+        private readonly IDeletableEntityRepository<Appointment> appointmentRepository;
 
-        public UserService(IDeletableEntityRepository<FitForLifeUser> users, IDeletableEntityRepository<Card> cardsRepository)
+        public UserService(IDeletableEntityRepository<FitForLifeUser> users, IDeletableEntityRepository<Card> cardsRepository, IDeletableEntityRepository<Appointment> appointmentRepository)
         {
             this.users = users;
             this.cardsRepository = cardsRepository;
+            this.appointmentRepository = appointmentRepository;
         }
 
         public async Task<FitForLifeUser> AddCardToUser(string userId, int cardId)
@@ -36,6 +38,16 @@
             curUser.Card = curCard;
             await users.SaveChangesAsync();
             return curUser;
+        }
+        public async Task<List<T>> GetAllEventsOnUserAsync<T>(string userId)
+        {
+            var events = await this.appointmentRepository
+                 .All()
+                 .Where(x => x.UserId == userId)
+                 .To<T>()
+                 .ToListAsync();
+
+            return events;
         }
 
         public async Task<FitForLifeUser> ChangeEmailAsync(string userId, string newEmail)

@@ -33,5 +33,7 @@
         public Task<T> GetUserByIdAsync<T>(string id);
 
         public Task<FitForLifeUser> AddCardToUser(string userId, int cardId);
+
+        public Task<List<T>> GetAllEventsOnUserAsync<T>(string userId);
     }
 }
