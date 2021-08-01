@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\**" />
+    <Content Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="CoreAdmin" Version="1.5.0" />
     <PackageReference Include="fullcalendar" Version="3.9.0" />
@@ -32,7 +39,8 @@
     <ProjectReference Include="..\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Folder Include="Areas\Administration\Views\Cards\" />
+    <Folder Include="Areas\Administration\Views\Trainers\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
     <Folder Include="wwwroot\lib\bootstrap\dist\js\" />

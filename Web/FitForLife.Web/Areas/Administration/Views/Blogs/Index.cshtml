@@ -1,0 +1,38 @@
+﻿@model FitForLife.Web.ViewModels.Blog.AllBlogViewModel
+@{ this.ViewData["Title"] = "Blogs"; }
+
+<h2>
+    All Blogs (@Model.Blogs.Count())
+    <span>
+        <a class="btn btn-info" asp-area="Administration" asp-controller="Blogs" asp-action="AddBlog">Add New Blog</a>
+    </span>
+</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Context</th>
+            <th scope="col">Type</th>
+            <th scope="col">Delete Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blogView in this.Model.Blogs)
+        {
+        <tr>
+            <th scope="row">@blogView.Name</th>
+            <td>@blogView.Context</td>
+            <td>@blogView.TypeBlog</td>
+            <td>
+                <form method="post">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            asp-area="Administration" asp-controller="Blogs" asp-action="DeleteBlog" asp-route-id="@blogView.Id">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

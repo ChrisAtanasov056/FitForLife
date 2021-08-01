@@ -31,7 +31,7 @@ namespace FitForLife.Controllers
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> Details(int Id)
+        public async Task<IActionResult> Details(string Id)
         {
             var viewModel = await this.eventServices.GetByIdAsync<EventViewModel>(Id);
 
@@ -42,7 +42,7 @@ namespace FitForLife.Controllers
             return Redirect("/Identity/Account/Login");
 
         }
-        public async Task<IActionResult> AddUserToEvent(int eventId)
+        public async Task<IActionResult> AddUserToEvent(string eventId)
         {
             if (this.User.Identity.IsAuthenticated)
             {

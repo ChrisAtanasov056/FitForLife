@@ -48,6 +48,27 @@ namespace FitForLife.Data.Seeding.CustomSeeders
                     StartEvent = DateTime.UtcNow.AddDays(2).AddHours(5),
                     EndEvent = DateTime.Now.AddDays(2).AddHours(6),
                     ClassId = dbContext.Classes.FirstOrDefault(x => x.Name == "Zumba").Id,
+                    AvailableSpots = 8,
+                },
+                new Event
+                {
+                    StartEvent = DateTime.UtcNow.AddDays(23).AddHours(5),
+                    EndEvent = DateTime.Now.AddDays(23).AddHours(6),
+                    ClassId = dbContext.Classes.FirstOrDefault(x => x.Name == "Pilates").Id,
+                    AvailableSpots = 12,
+                },
+                new Event
+                {
+                    StartEvent = DateTime.UtcNow.AddDays(5).AddHours(5),
+                    EndEvent = DateTime.Now.AddDays(5).AddHours(6),
+                    ClassId = dbContext.Classes.FirstOrDefault(x => x.Name == "Yoga").Id,
+                    AvailableSpots = 14,
+                },
+                new Event
+                {
+                    StartEvent = DateTime.UtcNow.AddDays(10).AddHours(5),
+                    EndEvent = DateTime.Now.AddDays(10).AddHours(6),
+                    ClassId = dbContext.Classes.FirstOrDefault(x => x.Name == "Kango Jumps").Id,
                     AvailableSpots = 16,
                 },
             };

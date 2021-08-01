@@ -6,7 +6,7 @@
 
     public class EventViewModel : IMapFrom<Event>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public DateTime StartEvent { get; set; }
 

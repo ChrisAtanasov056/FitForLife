@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitForLife.Data.Migrations
 {
     [DbContext(typeof(FitForLifeDbContext))]
-    [Migration("20210728103012_removeDeleteCard")]
-    partial class removeDeleteCard
+    [Migration("20210801085139_InithialCreate")]
+    partial class InithialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,27 @@ namespace FitForLife.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("FitForLife.Data.Models.Appointment", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("EventId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("UserId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Appointments");
+                });
 
             modelBuilder.Entity("FitForLife.Data.Models.Blog", b =>
                 {
@@ -31,6 +52,12 @@ namespace FitForLife.Data.Migrations
 
                     b.Property<string>("Context")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -99,9 +126,6 @@ namespace FitForLife.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MaxClients")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -138,6 +162,45 @@ namespace FitForLife.Data.Migrations
                     b.HasIndex("TrainerId");
 
                     b.ToTable("ClientsTrainers");
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AvailableSpots")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndEvent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartEvent")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Exercise", b =>
@@ -486,6 +549,25 @@ namespace FitForLife.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FitForLife.Data.Models.Appointment", b =>
+                {
+                    b.HasOne("FitForLife.Data.Models.Event", "Event")
+                        .WithMany("Appointments")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitForLife.Data.Models.FitForLifeUser", "User")
+                        .WithMany("Appointments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("FitForLife.Data.Models.Blog", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.FitForLifeUser", "Author")
@@ -514,6 +596,17 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
+                {
+                    b.HasOne("FitForLife.Data.Models.Class", "Class")
+                        .WithMany("Events")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
             modelBuilder.Entity("FitForLife.Data.Models.Exercise", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.TrainingDay", null)
@@ -528,7 +621,7 @@ namespace FitForLife.Data.Migrations
                         .HasForeignKey("CardId");
 
                     b.HasOne("FitForLife.Data.Models.Class", "Class")
-                        .WithMany("Clients")
+                        .WithMany("Trainers")
                         .HasForeignKey("ClassId");
 
                     b.Navigation("Card");
@@ -612,11 +705,20 @@ namespace FitForLife.Data.Migrations
 
             modelBuilder.Entity("FitForLife.Data.Models.Class", b =>
                 {
-                    b.Navigation("Clients");
+                    b.Navigation("Events");
+
+                    b.Navigation("Trainers");
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.FitForLifeUser", b =>
                 {
+                    b.Navigation("Appointments");
+
                     b.Navigation("Claims");
 
                     b.Navigation("Clients");

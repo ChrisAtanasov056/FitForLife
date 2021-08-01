@@ -13,7 +13,7 @@
         public FitForLifeUser User { get; set; }
         [Key]
         [Required]
-        public int EventId { get; set; }
+        public string EventId { get; set; }
 
         public Event Event { get; set; }
 

@@ -7,6 +7,8 @@ namespace FitForLife
     using FitForLife.Data.Repositories;
     using FitForLife.Data.Seeding;
     using FitForLife.Models;
+    using FitForLife.Services.Data;
+    using FitForLife.Services.Data.Blog;
     using FitForLife.Services.Data.Cards;
     using FitForLife.Services.Data.Classes;
     using FitForLife.Services.Data.Events;
@@ -60,6 +62,7 @@ namespace FitForLife
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITrainersService, TrainersService>();
             services.AddTransient<IEventService, EventService>();
+            services.AddTransient<IBlogService, BlogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

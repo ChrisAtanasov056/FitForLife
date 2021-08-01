@@ -8,7 +8,7 @@
     {
         public FitForLifeUser User { get; set; }
 
-        public int EventId { get; set; }
+        public string EventId { get; set; }
 
         public EventViewModel Event { get; set; }
     }

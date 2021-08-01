@@ -1,4 +1,6 @@
 ﻿using FitForLife.Data.Models;
+using FitForLife.Web.ViewModels.Classes;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,10 +10,12 @@ namespace FitForLife.Services.Data.Events
     {
         Task<List<T>> GetAllEventsAsync<T>();
 
-       
+        Task DeleteAsync(string id);
 
-        Task<T> GetByIdAsync<T>(int id);
+        Task<T> GetByIdAsync<T>(string id);
 
-        public Task<Event> AddUserToEvent(string userId, int eventId);
+        public Task<Event> AddUserToEvent(string userId, string eventId);
+
+        Task AddAsync(int classId, DateTime startEvent, DateTime endEvent, int availableSpots, string description);
     }
 }

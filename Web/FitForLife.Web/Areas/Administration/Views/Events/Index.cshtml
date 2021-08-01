@@ -1,0 +1,42 @@
+﻿@model FitForLife.Web.ViewModels.Events.AllEventsViewModel
+@{ this.ViewData["Title"] = "Events"; }
+
+<h2>
+    All Blogs (@Model.Events.Count())
+    <span>
+        <a class="btn btn-info" asp-area="Administration" asp-controller="Events" asp-action="AddEvent">Add New Event</a>
+    </span>
+</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Class</th>
+            <th scope="col">Start Event</th>
+            <th scope="col">End Event</th>
+            <th scope="col">Available Spots</th>
+            <th scope="col">Description</th>
+            <th scope="col">Delete Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var eventView in this.Model.Events)
+        {
+        <tr>
+            <th scope="row">@eventView.Class.Name</th>
+            <td>@eventView.StartEvent</td>
+            <td>@eventView.EndEvent</td>
+            <td>@eventView.AvailableSpots</td>
+            <td>@eventView.Description</td>
+            <td>
+                <form method="post">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            asp-area="Administration" asp-controller="Events" asp-action="DeleteEvent" asp-route-id="@eventView.Id">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

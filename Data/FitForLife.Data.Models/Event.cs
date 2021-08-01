@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 namespace FitForLife.Data.Models
 {
-   public class Event : BaseDeletableModel<int>
+   public class Event : BaseDeletableModel<string>
     {
         public Event()
         {
             Appointments = new HashSet<Appointment>();
+            this.Id = Guid.NewGuid().ToString();
         }
         public DateTime StartEvent { get; set; }
 
