@@ -1,0 +1,93 @@
+﻿@model FitForLife.Web.ViewModels.Trainers.TrainerInputModel
+
+@{
+    ViewData["Title"] = "Add Trainer";
+    var classes = this.ViewData["Classes"] as SelectList;
+    var classesNames = this.ViewData["ClassesNames"] as SelectList;
+}
+
+<div class="col-auto">
+    <h2>New Trainer</h2>
+    <form method="post" enctype="multipart/form-data" class="pt-4">
+        <div class="form-group">
+            <label class="col-auto">First Name</label>
+            <div class="col-auto">
+                <input type="text" asp-for="@Model.FirstName" class="form-control" required="required">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Last Name</label>
+            <div class="col-auto">
+                <input type="text" asp-for="@Model.LastName" class="form-control" required="required" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Email</label>
+            <div class="col-auto">
+                <input type="text" asp-for="@Model.Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Password</label>
+            <div class="col-auto">
+                <input type="password" asp-for="@Model.Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Profile Picture</label>
+            <div class="col-auto">
+                <input type="text" asp-for="@Model.ProfilePictureUrl" class="form-control">
+                <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Age</label>
+            <div class="col-auto">
+                <input type="number" asp-for="@Model.Age" class="form-control">
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">City</label>
+            <div class="col-auto">
+                <input type="text" asp-for="@Model.City" class="form-control">
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Available Spots</label>
+            <div class="col-auto">
+                <textarea type="text" asp-for="@Model.Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-auto col-form-label">Class</label>
+            <div class="col-auto">
+                <select asp-for="@Model.ClassId" class="form-control" asp-items="@classes">
+                </select>
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" class="btn btn-success"
+                        asp-area="Administration" asp-controller="Trainers" asp-action="AddTrainer">
+                    Add Trainer
+                </button>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-danger" asp-area="Administration" asp-controller="Trainers" asp-action="Index">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

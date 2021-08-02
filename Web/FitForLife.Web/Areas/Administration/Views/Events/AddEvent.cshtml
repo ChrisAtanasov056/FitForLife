@@ -40,7 +40,7 @@
         <div class="form-group">
             <label class="col-auto col-form-label">Class</label>
             <div class="col-auto">
-                <select asp-for="@Model.ClassId" class="form-control" asp-items="@classes">
+                <select asp-for="@Model.ClassId" class="form-control" asp-items="@classesNames">
                 </select>
                 <span asp-validation-for="ClassId" class="text-danger"></span>
             </div>

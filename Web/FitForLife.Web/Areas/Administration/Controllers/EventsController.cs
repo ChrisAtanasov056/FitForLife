@@ -30,12 +30,12 @@
             return this.View(viewModel);
         }
 
-        public async Task<IActionResult> AddEvent()
+        public IActionResult AddEvent()
         {
             var viewModels = classesService.GetAllAsync<ClassViewModel>().Result.Select(x=>x.Id);
             var viewModelsNames = classesService.GetAllAsync<ClassViewModel>().Result.Select(x=>x.Name);
             this.ViewData["Classes"] = new SelectList(viewModels);
-            this.ViewData["ClassesNames"] = new SelectList(viewModels);
+            this.ViewData["ClassesNames"] = new SelectList(viewModelsNames);
             return this.View();
         }
 

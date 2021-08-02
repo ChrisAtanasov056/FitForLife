@@ -1,0 +1,42 @@
+﻿@model FitForLife.Web.ViewModels.Trainers.AllTrainersViewModel
+@{ this.ViewData["Title"] = "Trainers"; }
+
+<h2>
+    All Trainers (@Model.Trainers.Count())
+    <span>
+        <a class="btn btn-info" asp-area="Administration" asp-controller="Trainers" asp-action="AddTrainer">Add New Trainer</a>
+    </span>
+</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Image</th>
+            <th scope="col">Class</th>
+            <th scope="col">Description</th>
+            <th scope="col">Delete Button</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainerView in this.Model.Trainers)
+        {
+        <tr>
+            <th scope="row">@trainerView.FirstName @trainerView.LastName</th>
+            <td>
+                <img class="align-self-center" src="@trainerView.ProfilePictureUrl" style="width:180px;height:120px;">
+            </td>
+            <td>@trainerView.Class.Name</td>
+            <td>@trainerView.Description</td>
+            <td>
+                <form method="post">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            asp-area="Administration" asp-controller="Trainers" asp-action="DeleteTrainer" asp-route-id="@trainerView.Id">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
