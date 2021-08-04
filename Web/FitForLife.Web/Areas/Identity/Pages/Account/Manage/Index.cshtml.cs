@@ -65,18 +65,24 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+            CardsViewModel card = null;
+            if (user.CardId != null)
+            {
+                card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+            }
             Username = userName;
-
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ProfilePicUrl =user.ProfilePictureUrl,
-                Card = card,
                 Appointments = await userService.GetAllEventsOnUserAsync<AppointmentViewModel>(user.Id)
             };
+            if (card!=null)
+            {
+                Input.Card = card;
+            }
             foreach (var appointment in Input.Appointments)
             {
                 appointment.Event = await eventService.GetByIdAsync<EventViewModel>(appointment.EventId);
@@ -86,7 +92,11 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            var card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+            CardsViewModel card = null;
+            if (user.CardId != null)
+            {
+                card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+            }
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -97,11 +107,14 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             this.Input.LastName = user.LastName;
             this.Input.PhoneNumber = user.PhoneNumber;
             this.Input.ProfilePicUrl = user.ProfilePictureUrl;
-            this.Input.Card = card;
             this.Input.Appointments = await userService.GetAllEventsOnUserAsync<AppointmentViewModel>(user.Id);
             foreach (var appointment in Input.Appointments)
             {
                 appointment.Event = await eventService.GetByIdAsync<EventViewModel>(appointment.EventId);
+            }
+            if (card != null)
+            {
+                this.Input.Card = card;
             }
             return Page();
         }

@@ -26,9 +26,5 @@
     <ProjectReference Include="..\FitForLife.Data.Models\FitForLife.Data.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 
 </Project>

@@ -18,7 +18,7 @@
             this.blogRepository = blogRepository;
         }
 
-        public async Task AddAsync(string name, string context, FitForLifeUser author ,TypeBlog type)
+        public async Task AddAsync(string name, string context, string author , string imageUrl, TypeBlog type)
         {
             await this.blogRepository.AddAsync(new Blog
             {
@@ -26,6 +26,7 @@
                 Context = context,
                 Author = author,
                 TypeBlog = type,
+                ImageUrl = imageUrl
             });
             await this.blogRepository.SaveChangesAsync();
         }

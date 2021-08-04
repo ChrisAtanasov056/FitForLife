@@ -11,7 +11,7 @@
 
         Task<T> GetByIdAsync<T>(string id);
 
-        Task AddAsync(string name, string context, FitForLifeUser author, TypeBlog type);
+        Task AddAsync(string name, string context, string author, string imageUrl, TypeBlog type);
 
         Task DeleteAsync(string id);
     }

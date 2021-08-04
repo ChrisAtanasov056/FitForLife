@@ -14,13 +14,16 @@
 
         public string Name { get; set; }
 
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        public string ImageUrl { get; set; }
+
         public string Context { get; set; }
 
         public TypeBlog TypeBlog { get; set; }
 
-        public string AuthorId { get; set; }
+        public string Author { get; set; }
 
-        public FitForLifeUser Author { get; set; }
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

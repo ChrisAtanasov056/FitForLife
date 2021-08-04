@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace FitForLife.Controllers
 {
     public class HomeController : Controller
-        
+
     {
         private readonly IClassesService classesService;
         private readonly ICardsService cardsService;
@@ -50,12 +50,12 @@ namespace FitForLife.Controllers
         {
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("/Home/Error/404")]
+        public IActionResult Error404()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View();
         }
+
         [Route("/Home/Error/{code:int}")]
         public IActionResult Error(int code)
         {
@@ -63,10 +63,12 @@ namespace FitForLife.Controllers
             // or just return the default error view
             return this.View();
         }
-        [Route("/Home/Error/404")]
-        public IActionResult Error404()
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            return this.View();
+            return this.View(
+                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }

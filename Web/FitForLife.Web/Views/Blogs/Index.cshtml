@@ -1,0 +1,56 @@
+﻿<link href="~/css/BlogPage.css" rel="stylesheet" />
+
+@model FitForLife.Web.ViewModels.Blog.AllBlogViewModel
+<div class="container">
+    <div class="col-md-12 col-lg-12">
+        @foreach (var blogView in Model.Blogs)
+        {
+            <article class="post vt-post">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                        <div class="post-type post-img">
+                            <a asp-controller="Blogs" asp-action="Details" asp-route-id="@blogView.Id"><img src="@blogView.ImageUrl" class="img-responsive" alt="image post"></a>
+                        </div>
+                        <div class="author-info author-info-2">
+                            <ul class="list-inline">
+                                <li>
+                                    <div class="info">
+                                        <p>Posted on:</p>
+                                        <strong>@blogView.CreatedOn.ToString("d")</strong>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="info">
+                                        <p>Author:</p>
+                                        <strong>@blogView.Author</strong>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                        <div class="caption">
+                            <h3 class="md-heading"><a asp-controller="Blogs" asp-action="Details" asp-route-id="@blogView.Id">@blogView.Name</a></h3>
+                            <p>@blogView.Context.Substring(0,300) ...</p>
+                            <button type="button" class="btn-info btn-sm">
+                                <a asp-controller="Blogs" asp-action="Details" asp-route-id="@blogView.Id">Read More</a> 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        }
+        <div class="pagination-wrap">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

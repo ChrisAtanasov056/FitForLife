@@ -46,7 +46,7 @@ namespace FitForLife.Areas.Administration.Controllers
             {
                 return this.View(model);
             }
-            await this.blogService.AddAsync(model.Name, model.Context, model.Author, model.TypeBlog);
+            await this.blogService.AddAsync(model.Name, model.Context, model.Author, model.ImageUrl,model.TypeBlog);
             return this.RedirectToAction("Index");
         }
         public async Task<IActionResult> DeleteBlog(string Id)
