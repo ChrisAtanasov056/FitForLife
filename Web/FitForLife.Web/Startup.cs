@@ -47,6 +47,16 @@ namespace FitForLife
                 .AddDefaultTokenProviders();
 
             services.AddSingleton(this.configuration);
+            // fb Login
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+                    facebookOptions.Scope.Add("public_profile");
+                    facebookOptions.Fields.Add("name");
+                    facebookOptions.Fields.Add("picture");
+                });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
