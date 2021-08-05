@@ -3,6 +3,8 @@
     using FitForLife.Services.Data;
     using FitForLife.Web.ViewModels.Blog;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class BlogsController : Controller
@@ -26,13 +28,18 @@
         public async Task<IActionResult> Details(string Id)
         {
             var viewModel = await this.blogService.GetByIdAsync<BlogViewModel>(Id);
-
-            if (this.User.Identity.IsAuthenticated)
-            {
-                return this.View(viewModel);
-            }
             return this.View(viewModel);
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddComment(BlogViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+            await this.blogService.AddingCommentToPost(model.CommentInputModel.BlogId ,model.CommentInputModel.Author, model.CommentInputModel.Context);
+            return Redirect(Url.RouteUrl("Index") +"/Blogs"+"/Details/" + model.Id);
         }
     }
 }

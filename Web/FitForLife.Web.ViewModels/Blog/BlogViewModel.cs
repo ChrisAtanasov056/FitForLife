@@ -4,6 +4,7 @@
     using FitForLife.Data.Models.Enums;
     using FitForLife.Services.Mapping;
     using System;
+    using System.Collections.Generic;
 
     public class BlogViewModel: IMapFrom<Blog>
     {
@@ -20,5 +21,9 @@
         public TypeBlog TypeBlog { get; set; }
 
         public string Author { get; set; }
+
+        public ICollection<CommentViewModel> Comments { get; set; }
+
+        public CommentInputModel CommentInputModel { get; set; }
     }
 }

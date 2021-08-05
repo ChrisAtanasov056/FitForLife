@@ -3,12 +3,15 @@
     using FitForLife.Data.Common.Models;
     using FitForLife.Data.Models.Enums;
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public class Blog : IDeletableEntity
     {
         public Blog()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.Comments = new HashSet<Comment>();
         }
         public string Id { get; init; }
 
@@ -27,5 +30,7 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

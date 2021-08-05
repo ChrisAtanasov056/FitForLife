@@ -47,7 +47,11 @@ namespace FitForLife.Controllers
             if (this.User.Identity.IsAuthenticated)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                await eventServices.AddUserToEvent(userId,eventId);
+                var @event = await eventServices.AddUserToEvent(userId,eventId);
+                if (@event == null)
+                {
+                    return Redirect("/Cards/Index");
+                }
                 return Redirect("/Identity/Account/Manage/MyCard");
             }
             else

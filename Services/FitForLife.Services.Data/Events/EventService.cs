@@ -3,6 +3,7 @@
     using FitForLife.Data.Common.Repositories;
     using FitForLife.Data.Models;
     using FitForLife.Services.Mapping;
+    using FitForLife.Web.ViewModels;
     using FitForLife.Web.ViewModels.Classes;
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -50,7 +51,7 @@
                     .All()
                     .Where(x => x.Id == userId)
                     .FirstOrDefaultAsync();
-                if (!user.Appointments.Any(x=>x.EventId == eventId))
+                if (user.Appointments.Any(x=>x.EventId == eventId))
                 {
                     return @event;
                 }
@@ -63,6 +64,10 @@
                 .All()
                 .Where(x => x.Id == user.CardId)
                 .FirstOrDefault();
+                if (curCard == null)
+                {
+                    return @event = null;
+                }
                 user.Card = curCard;
                 user.Card.Visits -= 1;
                 @event.AvailableSpots -= 1;

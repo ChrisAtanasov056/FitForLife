@@ -11,6 +11,10 @@
 
         Task<T> GetByIdAsync<T>(string id);
 
+        Task AddingCommentToPost(string blogId, string author, string context);
+
+        Task<List<T>> GetCommentsAllAsync<T>(string blogId);
+
         Task AddAsync(string name, string context, string author, string imageUrl, TypeBlog type);
 
         Task DeleteAsync(string id);

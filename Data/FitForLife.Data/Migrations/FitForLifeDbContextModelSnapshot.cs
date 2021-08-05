@@ -166,6 +166,42 @@ namespace FitForLife.Data.Migrations
                     b.ToTable("ClientsTrainers");
                 });
 
+            modelBuilder.Entity("FitForLife.Data.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("BlogId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Context")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
                 {
                     b.Property<string>("Id")
@@ -589,6 +625,15 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("Trainer");
                 });
 
+            modelBuilder.Entity("FitForLife.Data.Models.Comment", b =>
+                {
+                    b.HasOne("FitForLife.Data.Models.Blog", "Blog")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId");
+
+                    b.Navigation("Blog");
+                });
+
             modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.Class", "Class")
@@ -689,6 +734,11 @@ namespace FitForLife.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Blog", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Card", b =>

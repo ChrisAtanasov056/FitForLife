@@ -96,7 +96,7 @@ namespace FitForLife
             }
             if (env.IsDevelopment())
             {
-                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+                
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }

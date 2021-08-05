@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitForLife.Data.Migrations
 {
     [DbContext(typeof(FitForLifeDbContext))]
-    [Migration("20210803095122_AddCreationOnAndImageUrlToBLog")]
-    partial class AddCreationOnAndImageUrlToBLog
+    [Migration("20210805100842_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,8 +47,8 @@ namespace FitForLife.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AuthorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Context")
                         .HasColumnType("nvarchar(max)");
@@ -72,8 +72,6 @@ namespace FitForLife.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("Blogs");
                 });
@@ -168,6 +166,42 @@ namespace FitForLife.Data.Migrations
                     b.HasIndex("TrainerId");
 
                     b.ToTable("ClientsTrainers");
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Comment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("BlogId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Context")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
@@ -574,15 +608,6 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FitForLife.Data.Models.Blog", b =>
-                {
-                    b.HasOne("FitForLife.Data.Models.FitForLifeUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
-
-                    b.Navigation("Author");
-                });
-
             modelBuilder.Entity("FitForLife.Data.Models.ClientTrainer", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.FitForLifeUser", "Client")
@@ -600,6 +625,15 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("Client");
 
                     b.Navigation("Trainer");
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Comment", b =>
+                {
+                    b.HasOne("FitForLife.Data.Models.Blog", "Blog")
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogId");
+
+                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Event", b =>
@@ -702,6 +736,11 @@ namespace FitForLife.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FitForLife.Data.Models.Blog", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.Card", b =>
