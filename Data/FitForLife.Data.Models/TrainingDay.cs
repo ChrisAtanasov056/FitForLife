@@ -16,10 +16,6 @@
 
         public Day Day { get; set; }
 
-        public int MinRepsCount { get; set; }
-
-        public int MaxRepsCount { get; set; }
-
         public string WorkoutPlanId { get; set; }
 
         public virtual WorkoutPlan WorkoutPlan { get; set; }

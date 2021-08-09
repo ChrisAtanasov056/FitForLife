@@ -32,7 +32,7 @@ namespace FitForLife.Controllers
         {
             var classViewModel = new HomeAllClassViewModel
             {
-                Classes = await this.classesService.GetAllAsync<HomeClassViewModel>()
+                Classes = await this.classesService.GetAllAsync<HomeClassViewModel>(3)
             };
             var cardsViewModel = new AllCardsViewModel
             {

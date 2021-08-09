@@ -38,6 +38,9 @@
         
         public virtual Card Card { get; set; }
 
+        public string WorkoutPlanId { get; set; }
+
+        public virtual WorkoutPlan WorkoutPlan { get; set; }
 
         public int? ClassId { get; set; }
 

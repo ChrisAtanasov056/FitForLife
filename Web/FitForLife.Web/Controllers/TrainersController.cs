@@ -3,6 +3,7 @@
     using FitForLife.Services.Data.Trainers;
     using FitForLife.Web.ViewModels.Trainers;
     using Microsoft.AspNetCore.Mvc;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     public class TrainersController : Controller
@@ -27,5 +28,19 @@
             }
             return this.View(viewModel);
         }
+        public async Task<IActionResult> Details(string Id)
+        {
+            var trainerView =await this.trainersService.GetTrainerById<TrainerViewModel>(Id);
+            
+            return this.View(trainerView);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddUserToTrainer(string trainerId)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await trainersService.AddUserToTrainer(trainerId, userId);
+            return RedirectToAction("All");
+        }
+
     }
 }

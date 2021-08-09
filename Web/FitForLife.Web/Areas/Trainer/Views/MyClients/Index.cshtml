@@ -1,0 +1,63 @@
+﻿@model FitForLife.Web.ViewModels.Users.AllClientsViewModel
+
+@{ 
+    this.ViewData["Title"] = "Trainer Dashboard"; 
+    }
+
+
+<div class="container" style="margin-top: 5rem">
+    <h3>My Clients</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Profile Picture</th>
+                <th scope="col">Age</th>
+                <th scope="col">Workout Program</th>
+                <th scope="col">Add New Program</th>
+                <th scope="col">Delete Program</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var viewModel in Model.Clients)
+            {
+                <tr>
+                    <td>@viewModel.Client.FirstName @viewModel.Client.LastName</td>
+                    <td><img class="align-self-center" src="@viewModel.Client.ProfilePictureUrl" style="width:180px;height:120px;"></td>
+                    <td>@viewModel.Client.Age</td>
+                    <td>
+                        @if (viewModel.Client.WorkoutPlanId != null)
+                        {
+                            @viewModel.Client.WorkoutPlan
+                        }
+                        @if (viewModel.Client.WorkoutPlanId == null)
+                        {
+                            <h5>Do not have program yet</h5>
+                        }
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input type="text" name="clientId" value="@viewModel.ClientId" hidden />
+                            <button type="submit" class="btn btn-success btn-sm"
+                                    asp-area="Trainer" asp-controller="MyClients" asp-action="AddProgramIndex">
+                                Add Program
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        @if (viewModel.Client.WorkoutPlanId != null)
+                        {
+                            <form method="post">
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                        asp-area="Trainer" asp-controller="MyClients" asp-action="DeleteProgram" asp-route-id="@viewModel.Client.WorkoutPlanId">
+                                    Delete
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

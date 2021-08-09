@@ -42,10 +42,11 @@
 </div>
 <section id="gallery">
     <div class="container">
+        <h1 id="ClassesHomePage">Our Classes</h1>
         <div class="row">
             @foreach (var classView in @Model.Classes.Classes)
             {
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="card h-100">
                         <img src="@classView.PictureUrl" alt="" class="card-img-top">
                         <div class="card-body">

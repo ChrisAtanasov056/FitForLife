@@ -139,6 +139,7 @@ namespace FitForLife.Data.Migrations
                     ProfilePictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CardId = table.Column<int>(type: "int", nullable: true),
+                    WorkoutPlanId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClassId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -370,8 +371,6 @@ namespace FitForLife.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Day = table.Column<int>(type: "int", nullable: false),
-                    MinRepsCount = table.Column<int>(type: "int", nullable: false),
-                    MaxRepsCount = table.Column<int>(type: "int", nullable: false),
                     WorkoutPlanId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -391,6 +390,7 @@ namespace FitForLife.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    RepsCount = table.Column<int>(type: "int", nullable: false),
                     VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Difficulty = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
@@ -491,7 +491,9 @@ namespace FitForLife.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_WorkoutPlans_UserId",
                 table: "WorkoutPlans",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

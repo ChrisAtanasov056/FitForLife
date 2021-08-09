@@ -27,7 +27,10 @@
             <div class="d-flex" id="wrapper">
 
                 <!-- Sidebar -->
-                <partial name="_AdminSidebarPartial" />
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <partial name="_AdminSidebarPartial" />
+                }
 
                 <!-- Page Content -->
                 <div id="page-content-wrapper">

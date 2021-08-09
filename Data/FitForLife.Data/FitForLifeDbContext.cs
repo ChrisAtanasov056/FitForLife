@@ -63,7 +63,12 @@
                 .WithMany(t => t.Clients)
                 .HasForeignKey(ct => ct.TrainerId)
                 .OnDelete(DeleteBehavior.Restrict);
-
+            builder
+                .Entity<FitForLifeUser>()
+                .HasOne(w => w.WorkoutPlan)
+                .WithOne(u => u.User)
+                .HasForeignKey<WorkoutPlan>(b => b.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
             builder
                 .Entity<ClientTrainer>()
                 .HasKey(k => new { k.ClientId, k.TrainerId });

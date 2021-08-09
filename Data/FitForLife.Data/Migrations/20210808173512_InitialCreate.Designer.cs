@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitForLife.Data.Migrations
 {
     [DbContext(typeof(FitForLifeDbContext))]
-    [Migration("20210805100842_InitialCreate")]
+    [Migration("20210808173512_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,6 +262,9 @@ namespace FitForLife.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<int>("RepsCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("TrainingDayId")
                         .HasColumnType("nvarchar(450)");
 
@@ -408,6 +411,9 @@ namespace FitForLife.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("WorkoutPlanId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CardId");
@@ -431,12 +437,6 @@ namespace FitForLife.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxRepsCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinRepsCount")
                         .HasColumnType("int");
 
                     b.Property<string>("WorkoutPlanId")
@@ -480,7 +480,9 @@ namespace FitForLife.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("WorkoutPlans");
                 });
@@ -681,8 +683,9 @@ namespace FitForLife.Data.Migrations
             modelBuilder.Entity("FitForLife.Data.Models.WorkoutPlan", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.FitForLifeUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithOne("WorkoutPlan")
+                        .HasForeignKey("FitForLife.Data.Models.WorkoutPlan", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
@@ -773,6 +776,8 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("Roles");
 
                     b.Navigation("Trainers");
+
+                    b.Navigation("WorkoutPlan");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.TrainingDay", b =>

@@ -12,8 +12,10 @@ namespace FitForLife
     using FitForLife.Services.Data.Cards;
     using FitForLife.Services.Data.Classes;
     using FitForLife.Services.Data.Events;
+    using FitForLife.Services.Data.Exercises;
     using FitForLife.Services.Data.Trainers;
     using FitForLife.Services.Data.Users;
+    using FitForLife.Services.Data.WorkoutPlan;
     using FitForLife.Services.Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -73,6 +75,8 @@ namespace FitForLife
             services.AddTransient<ITrainersService, TrainersService>();
             services.AddTransient<IEventService, EventService>();
             services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IExercisesService, ExercisesService>();
+            services.AddTransient<IWorkoutPlanService, WorkoutPlanService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
