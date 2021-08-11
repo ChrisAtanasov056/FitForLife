@@ -11,6 +11,7 @@
         public Exercise()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.TrainingDays = new List<TrainingDay>();
         }
 
         public string Id { get; set; }
@@ -31,5 +32,7 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public ICollection<TrainingDay> TrainingDays { get; set; }
     }
 }

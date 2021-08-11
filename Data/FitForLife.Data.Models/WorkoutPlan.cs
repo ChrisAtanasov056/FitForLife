@@ -11,7 +11,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.CreatedOn = DateTime.UtcNow;
-            this.TrainingDays = new HashSet<TrainingDay>();
+            this.TrainingDays = new List<TrainingDay>();
         }
 
         public string Id { get; set; }

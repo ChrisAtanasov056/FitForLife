@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.MyPlan;
+}
+@{
+    var days = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().ToList();
+    var dayCount = 1;
+}
+<div class="container" style="margin-top: 5rem">
+    <h2>Diffilculty: @Model.Input.WorkoutPlan.Difficulty</h2>
+    <table class="table table-bordered table-striped">
+        <tbody>
+
+            @foreach (var trainingDay in Model.Input.WorkoutPlan.TrainingDays)
+            {
+                var count = 0;
+
+                <tr>
+                    <th>
+                        @days[dayCount]
+                    </th>
+                    @for (int i = 0; i < Model.Input.WorkoutPlan.TrainingDays.Length; i++)
+                    {
+
+                        if (trainingDay.Exercises.Length > i)
+                        {
+                            if (i <= trainingDay.Exercises.Length)
+                            {
+
+                                <td>
+                                    <a href="@trainingDay.Exercises[count].VideoUrl">@trainingDay.Exercises[count].Name</a>
+                                </td>
+                                count++;
+                            }
+
+                        }
+                        else
+                        {
+                            count = 0;
+                            <td>REST</td>
+                        }
+                    }
+                </tr>
+                dayCount++;
+                if (dayCount == 7)
+                {
+                    dayCount = 0;
+                }
+            }
+
+        </tbody>
+    </table>
+</div>

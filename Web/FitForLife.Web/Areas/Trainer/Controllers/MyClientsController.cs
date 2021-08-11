@@ -38,11 +38,16 @@
             //;
             return this.View(classViewModel);
         }
+        public async Task<IActionResult> PlanDetails(string planId)
+        {
+            var viewModel = await this.workoutPlanService.GetWorkoutPlanById<WorkoutPlanViewModel>(planId);
+            return this.View(viewModel);
+        }
         [HttpPost]
         public async Task<IActionResult> AddProgramIndex(string clientId)
         {
             var exercises = await this.exercisesService.GetAllExerciseAsync<ExerciseViewModel>();
-            this.ViewData["Exercises"] = new SelectList(exercises);
+            this.ViewData["Exercises"] = new SelectList(exercises, nameof(ExerciseViewModel.Id),nameof(ExerciseViewModel.Name), nameof(ExerciseViewModel.Difficulty));
             this.ViewData["ClientId"] = clientId;
             return this.View();
         }
@@ -50,6 +55,12 @@
         public async Task<IActionResult> AddProgram(AllTrainingDaysInput model)
         {
             await this.workoutPlanService.AddProgramAsync(model);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteProgram(string Id)
+        {
+            await this.workoutPlanService.DeletePlan(Id);
             return RedirectToAction("Index");
         }
     }

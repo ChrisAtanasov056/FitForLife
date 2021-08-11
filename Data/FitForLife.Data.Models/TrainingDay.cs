@@ -9,7 +9,7 @@
         public TrainingDay()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Exercises = new HashSet<Exercise>();
+            this.Exercises = new List<Exercise>();
         }
 
         public string Id { get; set; }

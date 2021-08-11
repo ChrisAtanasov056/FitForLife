@@ -28,7 +28,13 @@
                     <td>
                         @if (viewModel.Client.WorkoutPlanId != null)
                         {
-                            @viewModel.Client.WorkoutPlan
+                        <form method="post">
+                            <input type="text" name="planId" value="@viewModel.Client.WorkoutPlanId" hidden />
+                            <button type="submit" class="btn btn-success btn-sm"
+                                    asp-area="Trainer" asp-controller="MyClients" asp-action="PlanDetails">
+                                Details
+                            </button>
+                        </form>
                         }
                         @if (viewModel.Client.WorkoutPlanId == null)
                         {
@@ -36,13 +42,20 @@
                         }
                     </td>
                     <td>
-                        <form method="post">
-                            <input type="text" name="clientId" value="@viewModel.ClientId" hidden />
-                            <button type="submit" class="btn btn-success btn-sm"
-                                    asp-area="Trainer" asp-controller="MyClients" asp-action="AddProgramIndex">
-                                Add Program
-                            </button>
-                        </form>
+                        @if (viewModel.Client.WorkoutPlanId == null)
+                        {
+                            <form method="post">
+                                <input type="text" name="clientId" value="@viewModel.ClientId" hidden />
+                                <button type="submit" class="btn btn-success btn-sm"
+                                        asp-area="Trainer" asp-controller="MyClients" asp-action="AddProgramIndex">
+                                    Add Program
+                                </button>
+                            </form>
+                        }
+                        @if (viewModel.Client.WorkoutPlanId != null)
+                        {
+                            <h5>The Client have program already</h5>
+                        }
                     </td>
                     <td>
                         @if (viewModel.Client.WorkoutPlanId != null)

@@ -8,7 +8,7 @@ namespace FitForLife.Data.Models
     {
         public Event()
         {
-            Appointments = new HashSet<Appointment>();
+            Appointments = new List<Appointment>();
             this.Id = Guid.NewGuid().ToString();
         }
         public DateTime StartEvent { get; set; }

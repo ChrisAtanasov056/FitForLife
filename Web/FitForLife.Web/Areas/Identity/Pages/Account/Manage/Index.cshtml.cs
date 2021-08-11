@@ -7,9 +7,11 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
     using FitForLife.Services.Data.Cards;
     using FitForLife.Services.Data.Events;
     using FitForLife.Services.Data.Users;
+    using FitForLife.Services.Data.WorkoutPlan;
     using FitForLife.Web.ViewModels.Appointment;
     using FitForLife.Web.ViewModels.Cards;
     using FitForLife.Web.ViewModels.Events;
+    using FitForLife.Web.ViewModels.WorkoutPlan;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,18 +21,20 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<FitForLifeUser> _signInManager;
         private readonly IUserService userService;
         private readonly ICardsService cardsService;
+        private readonly IWorkoutPlanService workoutService;
         private readonly IEventService eventService;
 
         public IndexModel(
             UserManager<FitForLifeUser> userManager,
             SignInManager<FitForLifeUser> signInManager,
-            IUserService userService, ICardsService cardsService, IEventService eventService)
+            IUserService userService, ICardsService cardsService, IEventService eventService, IWorkoutPlanService workoutService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this.userService = userService;
             this.cardsService = cardsService;
             this.eventService = eventService;
+            this.workoutService = workoutService;
         }
 
         [TempData]
@@ -40,7 +44,7 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         public InputModel Input { get; set; }
 
         public string Username { get; set; }
-        
+
         public class InputModel
         {
             [Phone]
@@ -57,6 +61,8 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
 
             public int CardId { get; set; }
             public CardsViewModel Card { get; set; }
+            public string WorkoutPlanId { get; set; }
+            public WorkoutPlanViewModel WorkoutPlan { get; set;}
 
             public List<AppointmentViewModel> Appointments { get; set; }
         }
@@ -66,9 +72,15 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             CardsViewModel card = null;
+            WorkoutPlanViewModel workoutPlan = null;
             if (user.CardId != null)
             {
                 card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+                
+            }
+            if (user.WorkoutPlanId != null)
+            {
+                workoutPlan = await workoutService.GetWorkoutPlanById<WorkoutPlanViewModel>(user.WorkoutPlanId);
             }
             Username = userName;
             Input = new InputModel
@@ -83,6 +95,10 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             {
                 Input.Card = card;
             }
+            if (workoutPlan != null)
+            {
+                Input.WorkoutPlan = workoutPlan;
+            }
             foreach (var appointment in Input.Appointments)
             {
                 appointment.Event = await eventService.GetByIdAsync<EventViewModel>(appointment.EventId);
@@ -93,9 +109,16 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
         {
             var user = await _userManager.GetUserAsync(User);
             CardsViewModel card = null;
+            WorkoutPlanViewModel workoutPlan = null; 
             if (user.CardId != null)
             {
                 card = await cardsService.GetByIdAsync<CardsViewModel>((int)user.CardId);
+
+            }
+            if (user.WorkoutPlanId!= null)
+            {
+                workoutPlan = await workoutService.GetWorkoutPlanById<WorkoutPlanViewModel>(user.WorkoutPlanId);
+
             }
             if (user == null)
             {
@@ -115,6 +138,10 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             if (card != null)
             {
                 this.Input.Card = card;
+            }
+            if (workoutPlan != null)
+            {
+                this.Input.WorkoutPlan = workoutPlan;
             }
             return Page();
         }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitForLife.Data.Migrations
 {
     [DbContext(typeof(FitForLifeDbContext))]
-    [Migration("20210808173512_InitialCreate")]
+    [Migration("20210810065422_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,21 @@ namespace FitForLife.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ExerciseTrainingDay", b =>
+                {
+                    b.Property<string>("ExercisesId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TrainingDaysId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ExercisesId", "TrainingDaysId");
+
+                    b.HasIndex("TrainingDaysId");
+
+                    b.ToTable("ExerciseTrainingDay");
+                });
 
             modelBuilder.Entity("FitForLife.Data.Models.Appointment", b =>
                 {
@@ -265,9 +280,6 @@ namespace FitForLife.Data.Migrations
                     b.Property<int>("RepsCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("TrainingDayId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -276,8 +288,6 @@ namespace FitForLife.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TrainingDayId");
 
                     b.ToTable("Exercises");
                 });
@@ -591,6 +601,21 @@ namespace FitForLife.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ExerciseTrainingDay", b =>
+                {
+                    b.HasOne("FitForLife.Data.Models.Exercise", null)
+                        .WithMany()
+                        .HasForeignKey("ExercisesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitForLife.Data.Models.TrainingDay", null)
+                        .WithMany()
+                        .HasForeignKey("TrainingDaysId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FitForLife.Data.Models.Appointment", b =>
                 {
                     b.HasOne("FitForLife.Data.Models.Event", "Event")
@@ -647,13 +672,6 @@ namespace FitForLife.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Class");
-                });
-
-            modelBuilder.Entity("FitForLife.Data.Models.Exercise", b =>
-                {
-                    b.HasOne("FitForLife.Data.Models.TrainingDay", null)
-                        .WithMany("Exercises")
-                        .HasForeignKey("TrainingDayId");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.FitForLifeUser", b =>
@@ -778,11 +796,6 @@ namespace FitForLife.Data.Migrations
                     b.Navigation("Trainers");
 
                     b.Navigation("WorkoutPlan");
-                });
-
-            modelBuilder.Entity("FitForLife.Data.Models.TrainingDay", b =>
-                {
-                    b.Navigation("Exercises");
                 });
 
             modelBuilder.Entity("FitForLife.Data.Models.WorkoutPlan", b =>

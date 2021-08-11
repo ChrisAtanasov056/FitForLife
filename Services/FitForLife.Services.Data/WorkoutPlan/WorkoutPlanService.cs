@@ -10,29 +10,42 @@ namespace FitForLife.Services.Data.WorkoutPlan
     using System.Linq;
     using FitForLife.Data.Models.Enums;
     using FitForLife.Services.Data.Users;
+    using FitForLife.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class WorkoutPlanService : IWorkoutPlanService
     {
         private readonly IDeletableEntityRepository<WorkoutPlan> workoutPlanRepository;
         private readonly IDeletableEntityRepository<FitForLifeUser> clientRepository;
+        private readonly IDeletableEntityRepository<Exercise> exerciseRepository;
         private readonly IUserService userService;
 
-        public WorkoutPlanService(IDeletableEntityRepository<WorkoutPlan> workoutPlanRepository, IDeletableEntityRepository<FitForLifeUser> clientRepository, IUserService userService)
+        public WorkoutPlanService(IDeletableEntityRepository<WorkoutPlan> workoutPlanRepository, IDeletableEntityRepository<FitForLifeUser> clientRepository, IUserService userService, IDeletableEntityRepository<Exercise> exerciseRepository)
         {
             this.workoutPlanRepository = workoutPlanRepository;
             this.clientRepository = clientRepository;
             this.userService = userService;
+            this.exerciseRepository = exerciseRepository;
         }
 
         public async Task AddProgramAsync(AllTrainingDaysInput trainingDays)
         {
             Difficulty difficulty = FindDiffilculty(trainingDays.TrainingDayInputs);
             var curTrainigDays = new List<TrainingDay>();
+           
+            
             foreach (var trainingDayInput in trainingDays.TrainingDayInputs)
             {
+                var curExerciseOftheDay = new List<Exercise>();
+                foreach (var exercise in trainingDayInput.Exercises)
+                {
+                    curExerciseOftheDay.Add(await this.exerciseRepository.All()
+                        .Where(x=>x.Id == exercise.Id)
+                        .FirstOrDefaultAsync());
+                }
                 curTrainigDays.Add(new TrainingDay()
                 {
-                    Exercises = trainingDayInput.Exercises,
+                    Exercises = curExerciseOftheDay
                 });
             }
             var workoutPlan = new WorkoutPlan
@@ -81,6 +94,32 @@ namespace FitForLife.Services.Data.WorkoutPlan
             }
 
             return difficulty;
+        }
+
+        public async Task<T> GetWorkoutPlanById<T>(string id)
+        {
+            var workoutPlan = await this.workoutPlanRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+            return workoutPlan;
+        }
+
+        public async Task DeletePlan(string id)
+        {
+           var workoutPlan = await this.workoutPlanRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+            this.workoutPlanRepository.HardDelete(workoutPlan);
+            var client= await this.clientRepository.All()
+                .Where(x => x.WorkoutPlanId == workoutPlan.Id)
+                .FirstOrDefaultAsync();
+            client.WorkoutPlan = null;
+            client.WorkoutPlanId = null;
+            await clientRepository.SaveChangesAsync();
+            await workoutPlanRepository.SaveChangesAsync();
         }
     }
 }

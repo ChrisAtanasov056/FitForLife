@@ -9,8 +9,8 @@
     {
         public Class()
         {
-            this.Trainers = new HashSet<FitForLifeUser>();
-            this.Events = new HashSet<Event>();
+            this.Trainers = new List<FitForLifeUser>();
+            this.Events = new List<Event>();
         }
 
         [Required]
