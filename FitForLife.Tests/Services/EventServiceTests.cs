@@ -35,7 +35,7 @@
 
             await this.Service.DeleteAsync(@event.Id);
 
-            var eventsCount = this.DbContext.Events.Where(x => !x.IsDeleted).ToArray().Count();
+            var eventsCount = this.DbContext.Events.Where(x => !x.IsDeleted).ToList().Count();
             var deletedEvent = await this.DbContext.Events.FirstOrDefaultAsync(x => x.Id == @event.Id);
             Assert.Equal(0, eventsCount);
             Assert.Null(deletedEvent);

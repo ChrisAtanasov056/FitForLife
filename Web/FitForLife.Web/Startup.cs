@@ -47,18 +47,20 @@ namespace FitForLife
                 .AddRoles<FitForLifeRole>()
                 .AddEntityFrameworkStores<FitForLifeDbContext>()
                 .AddDefaultTokenProviders();
+           
+            services.AddMemoryCache();
 
             services.AddSingleton(this.configuration);
             // fb Login
-            services.AddAuthentication()
-                .AddFacebook(facebookOptions =>
-                {
-                    facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
-                    facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
-                    facebookOptions.Scope.Add("public_profile");
-                    facebookOptions.Fields.Add("name");
-                    facebookOptions.Fields.Add("picture");
-                });
+            //services.AddAuthentication()
+            //    .AddFacebook(facebookOptions =>
+            //    {
+            //        facebookOptions.AppId = this.configuration["Authentication:Facebook:AppId"];
+            //        facebookOptions.AppSecret = this.configuration["Authentication:Facebook:AppSecret"];
+            //        facebookOptions.Scope.Add("public_profile");
+            //        facebookOptions.Fields.Add("name");
+            //        facebookOptions.Fields.Add("picture");
+            //    });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -85,7 +87,7 @@ namespace FitForLife
             AutoMapperConfig.RegisterMappings(Assembly.Load("FitForLife.Web.ViewModels"),typeof(ErrorViewModel)
                 .GetTypeInfo()
                 .Assembly);
-            
+
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -93,7 +95,7 @@ namespace FitForLife
 
                 if (env.IsDevelopment())
                 {
-                    dbContext.Database.Migrate();
+                     dbContext.Database.Migrate();
                 }
 
                 new FitForLifeDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();

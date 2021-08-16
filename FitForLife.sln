@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitForLife.Web", "Web\FitFo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitForLife.Web.ViewModels", "Web\FitForLife.Web.ViewModels\FitForLife.Web.ViewModels.csproj", "{33DE0BC2-C996-49E8-AE2E-5B2897ECBBEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{886F5416-F6B2-4704-A08C-114EBBF22263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitForLife.Tests", "FitForLife.Tests\FitForLife.Tests.csproj", "{2275C317-86D5-4BF8-BE96-FFC7C89FB09E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{33DE0BC2-C996-49E8-AE2E-5B2897ECBBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33DE0BC2-C996-49E8-AE2E-5B2897ECBBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33DE0BC2-C996-49E8-AE2E-5B2897ECBBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2275C317-86D5-4BF8-BE96-FFC7C89FB09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2275C317-86D5-4BF8-BE96-FFC7C89FB09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2275C317-86D5-4BF8-BE96-FFC7C89FB09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2275C317-86D5-4BF8-BE96-FFC7C89FB09E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{260FEDDB-1035-4357-92DD-620C269E5351} = {2AD3A257-17DD-4DCD-B9CA-1947B3EFF75A}
 		{BAE00A11-29E5-4B39-802C-E11F949F8A24} = {3B8BA46D-37C5-4D11-BFCB-9A4A34F84CD5}
 		{33DE0BC2-C996-49E8-AE2E-5B2897ECBBEB} = {3B8BA46D-37C5-4D11-BFCB-9A4A34F84CD5}
+		{2275C317-86D5-4BF8-BE96-FFC7C89FB09E} = {886F5416-F6B2-4704-A08C-114EBBF22263}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A9AB897B-C94E-41F3-9C07-270D29C881A8}

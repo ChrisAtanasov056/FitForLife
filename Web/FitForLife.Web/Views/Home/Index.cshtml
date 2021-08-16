@@ -40,57 +40,80 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<section id="gallery">
+<section class="team section">
     <div class="container">
-        <h1 id="ClassesHomePage">Our Classes</h1>
+        <h1 class="section-title">Our Team Section</h1>
         <div class="row">
-            @foreach (var classView in @Model.Classes.Classes)
+            @foreach (var trainerView in Model.Trainers.Trainers)
             {
-                <div class="col-sm-4">
-                    <div class="card h-100">
-                        <img src="@classView.PictureUrl" alt="" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">@classView.Name</h5>
-                            <p class="card-text">@classView.Description</p>
-                            <button type="button" class="btn btn-info btn-lg" asp-controller="Classes" asp-action="Details" asp-route-id="@classView.Id">Join Now!</button>
-                        </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="team-item">
+                        <figure>
+                            <img src="@trainerView.ProfilePictureUrl" alt="">
+                            <figcaption>
+                                <div class="info">
+                                    <h3>@trainerView.FirstName @trainerView.LastName</h3>
+                                    <p>@trainerView.Class.Name</p>
+                                </div>
+                                <div class="social"><a asp-controller="Trainers" asp-action="Details" asp-route-id="@trainerView.Id">Bio</a></div>
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>
             }
         </div>
     </div>
 </section>
-<div style="margin-top: 20px" class="container-fluid">
-    <section id="pricing" class="bg-white">
-        <div class="container h-50">
-            <h2 class="text-center">PRICING</h2>
-            <div class="spacer spacer-line border-primary">&nbsp;</div>
-            <div class="spacer">&nbsp;</div>
-            <div class="row">
-                @foreach (var card in Model.Cards.Cards)
-                {
-                    <div class="col-md-3">
-                        <div class="pricing-table">
-                            <div class="pricing-table-title">
-                                <h5 class="pricing-title bg-info-hover text-white">@card.Name</h5>
-                            </div>
-                            <div class="pricing-table-price text-center bg-info">
-                                <p class="title-font">
-                                    <span class="pricing-currency text-white">$</span>
-                                    <span class="pricing-price text-white">@card.Price/</span>
-                                    <span class="pricing-period text-white">/ @card.Visits Visits.</span>
-                                </p>
-                            </div>
-                            <div class="pricing-table-content">
-                                <div id="BecomeMemberButton">
-                                    <a asp-action="Index" asp-controller="Cards">Become a Member</a>
-                                </div><!-- / pricing-table-button -->
-                            </div><!-- / pricing-table-content -->
-                        </div><!-- / pricing-table -->
-                    </div><!-- / column -->
-                }
-            </div><!-- / row -->
-        </div><!-- / container -->
-    </section>
 
+<section class="team section">
+    <div class="container-fluid" style="background-color: #677e8e">
+        <h1 class="section-title">Our Classes </h1>
+        <div class="row">
+            @foreach (var classView in Model.Classes.Classes)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="team-item">
+                        <figure>
+                            <img src="@classView.PictureUrl" alt="">
+                            <figcaption>
+                                <div class="info">
+                                    <h3>@classView.Name</h3>
+                                    <p>@classView.Description.Substring(0, 50) ...</p>
+                                </div>
+                                <div class="social"><a asp-controller="Classes" asp-action="Index">See More</a></div>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="pricing8 py-5" style="src()margin-top: 50px">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h3 class="mb-3">Pricing to make your Work Effective</h3>
+                <h6 class="subtitle font-weight-normal">We offer 100% satisafaction and Money back Guarantee</h6>
+            </div>
+        </div>
+        <!-- row  -->
+        <div class="row mt-4">
+            <!-- column  -->
+            @foreach (var card in Model.Cards.Cards)
+            {
+                <div class="col-md-3 ml-auto pricing-box align-self-center">
+                    <div class="card mb-4">
+                        <div class="card-body p-4 text-center">
+                            <h5 class="font-weight-normal">@card.Name</h5>
+                            <sup>$</sup><span class="text-dark display-5">@card.Price</span>
+                            <h6 class="font-weight-light font-14">/Month</h6>
+                            <p class="mt-4">@card.Visits Visits</p>
+                        </div>
+                        <a class="btn btn-info-gradiant p-3 btn-block border-0 text-white" asp-action="Index" asp-controller="Cards">CHOOSE PLAN </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>

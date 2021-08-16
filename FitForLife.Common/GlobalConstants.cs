@@ -10,6 +10,11 @@
 
         public const string SystemName = "Fit4Life";
 
+        public class Cache
+        {
+            public const string HomeViewMemoryCache = nameof(HomeViewMemoryCache);
+        }
+
 
         public static class AccountsSeeding
         {

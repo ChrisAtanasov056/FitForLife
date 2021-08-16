@@ -10,7 +10,6 @@
 
         public Task<string> GetLastNameAsync(string id);
 
-        public Task<string> GetCardPictureUrlAsync(string id);
 
         public Task<string> GetProfilePictureUrlAsync(string id);
 
@@ -18,15 +17,7 @@
 
         public Task<FitForLifeUser> ChangeLastNameAsync(string id, string lastName);
 
-        public Task<FitForLifeUser> ChangeProfilePhotoAsync(string userId, string newProfilePhotoUrl);
-
-        public Task<int> GetUsersCountAsync(string trainerId = null);
-
         public Task<FitForLifeUser> ChangeEmailAsync(string userId, string newEmail);
-
-        public Task<IEnumerable<string>> GetAllEmailsAsync();
-
-        public Task<IEnumerable<T>> GetAllUsersAsync<T>(string trainerId = null);
 
         public Task<FitForLifeUser> GetUserByIdAsync(string id);
 

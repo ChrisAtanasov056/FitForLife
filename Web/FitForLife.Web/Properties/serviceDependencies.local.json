@@ -1,10 +1,25 @@
 {
   "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fitforlifewebdbserver/databases/FitForLife.Web_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:FitForLifeDbContextConnection",
+      "secretStore": "LocalSecretsFile"
+    },
     "mssql1": {
-      "resourceId": null,
-      "type": "mssql.local",
-      "connectionId": "DefaultConnection",
-      "secretStore": null
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fitforlifewebdbserver/databases/FitForLife.Web_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "secretStore": "LocalSecretsFile"
+    },
+    "appInsights1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/microsoft.insights/components/FitForLifeWeb202108151216",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_CONNECTIONSTRING",
+      "secretStore": "LocalSecretsFile"
     }
   }
 }

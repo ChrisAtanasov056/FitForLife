@@ -7,7 +7,7 @@
 
     public interface ITrainersService
     {
-        Task<List<T>> GetAllTrainersAsync<T>();
+        Task<List<T>> GetAllTrainersAsync<T>(int? count = null);
 
         Task<List<ClientTrainer>> GetAllClients<T>(string id);
 

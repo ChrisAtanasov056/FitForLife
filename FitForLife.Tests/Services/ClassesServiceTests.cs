@@ -59,7 +59,7 @@ namespace FitForLife.Tests.Services
 
             await this.Service.DeleteAsync(@class.Id);
 
-            var classCount = this.DbContext.Classes.Where(x => !x.IsDeleted).ToArray().Count();
+            var classCount = this.DbContext.Classes.Where(x => !x.IsDeleted).ToList().Count();
             var deletedClass = await this.DbContext.Classes.FirstOrDefaultAsync(x => x.Id == @class.Id);
             Assert.Equal(0, classCount);
             Assert.Null(deletedClass);

@@ -1,48 +1,68 @@
-﻿using FitForLife.Models;
-using FitForLife.Services.Data.Cards;
-using FitForLife.Services.Data.Classes;
-using FitForLife.Web.ViewModels.Cards;
-using FitForLife.Web.ViewModels.Classes;
-using FitForLife.Web.ViewModels.Home;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace FitForLife.Controllers
+﻿namespace FitForLife.Controllers
 {
+    using FitForLife.Models;
+    using FitForLife.Services.Data.Cards;
+    using FitForLife.Services.Data.Classes;
+    using FitForLife.Services.Data.Trainers;
+    using FitForLife.Web.ViewModels.Cards;
+    using FitForLife.Web.ViewModels.Classes;
+    using FitForLife.Web.ViewModels.Home;
+    using FitForLife.Web.ViewModels.Trainers;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Logging;
+    using System;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+
+    using static FitForLife.Common.GlobalConstants.Cache;
+
     public class HomeController : Controller
 
     {
         private readonly IClassesService classesService;
+        private readonly ITrainersService trainersService;
         private readonly ICardsService cardsService;
         private readonly ILogger<HomeController> _logger;
+        private readonly IMemoryCache cache;
 
-        public HomeController(ILogger<HomeController> logger, IClassesService classesService, ICardsService cardsService)
+        public HomeController(ILogger<HomeController> logger, IClassesService classesService, ICardsService cardsService, IMemoryCache cache, ITrainersService trainersService)
         {
             _logger = logger;
             this.classesService = classesService;
             this.cardsService = cardsService;
+            this.cache = cache;
+            this.trainersService = trainersService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var classViewModel = new HomeAllClassViewModel
+            var allView = this.cache.Get<HomeViewModels>(HomeViewMemoryCache);
+            if (allView == null)
             {
-                Classes = await this.classesService.GetAllAsync<HomeClassViewModel>(3)
-            };
-            var cardsViewModel = new AllCardsViewModel
-            {
-                Cards = await this.cardsService.GetAllAsync<CardsViewModel>()
-            };
-            var allView = new HomeViewModels
-            {
-                Cards = cardsViewModel,
-                Classes = classViewModel,
-            };
+                var classViewModel = new HomeAllClassViewModel
+                {
+                    Classes = await this.classesService.GetAllAsync<HomeClassViewModel>(3)
+                };
+                var cardsViewModel = new AllCardsViewModel
+                {
+                    Cards = await this.cardsService.GetAllAsync<CardsViewModel>()
+                };
+                var trainerViewModel = new AllTrainersViewModel
+                {
+                    Trainers = await this.trainersService.GetAllTrainersAsync<TrainerViewModel>(3)
+                };
+                allView = new HomeViewModels
+                {
+                    Cards = cardsViewModel,
+                    Classes = classViewModel,
+                    Trainers = trainerViewModel,
+                };
+                var cacheOptions = new MemoryCacheEntryOptions()
+                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(10));
+
+                this.cache.Set(HomeViewMemoryCache, allView, cacheOptions);
+            }
             return View(allView);
         }
 

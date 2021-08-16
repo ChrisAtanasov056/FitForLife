@@ -56,7 +56,7 @@
 
             await this.Service.DeleteAsync(card.Id);
 
-            var cardsCount = this.DbContext.Cards.Where(x => !x.IsDeleted).ToArray().Count();
+            var cardsCount = this.DbContext.Cards.Where(x => !x.IsDeleted).ToList().Count();
             var deletedCard = await this.DbContext.Cards.FirstOrDefaultAsync(x => x.Id == card.Id);
             Assert.Equal(0, cardsCount);
             Assert.Null(deletedCard);

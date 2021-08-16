@@ -19,7 +19,7 @@
         public async Task GetCommentsAllAsyncShoudWorkCorrectly()
         {
             var blog = await this.CreateBlogPostAsync();
-            var comment = await this.CreateCommentAsync(blog);
+            await this.CreateCommentAsync(blog);
 
 
             var AllcomentsCount = await this.Service.GetCommentsAllAsync<TestCommentModel>(blog.Id);
@@ -46,9 +46,9 @@
         [Fact]
         public async Task GetAllAsync()
         {
-            var blogOne = await this.CreateBlogPostAsync();
-            var blogTwo = await this.CreateBlogPostAsync();
-            var blogThree = await this.CreateBlogPostAsync();
+            await this.CreateBlogPostAsync();
+             await this.CreateBlogPostAsync();
+            await this.CreateBlogPostAsync();
 
             var returnBlog = await this.Service.GetAllAsync<TestBlogModel>();
 
@@ -90,7 +90,7 @@
 
             await this.Service.DeleteAsync(blogPost.Id);
 
-            var blogsCount = this.DbContext.Blogs.Where(x => !x.IsDeleted).ToArray().Count();
+            var blogsCount = this.DbContext.Blogs.Where(x => !x.IsDeleted).ToList().Count();
             var deletedBlogPost = await this.DbContext.Blogs.FirstOrDefaultAsync(x => x.Id == blogPost.Id);
             Assert.Equal(0, blogsCount);
             Assert.Null(deletedBlogPost);

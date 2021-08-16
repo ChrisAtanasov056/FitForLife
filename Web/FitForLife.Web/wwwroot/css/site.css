@@ -17,8 +17,14 @@ for details on configuring this project to bundle and minify static web assets. 
     max-height: 72px;
     max-width: 150px;
 }
-#gallery{
-    margin-top: 50px;
+
+#homePageClasses {
+    margin-top: 20px;
+    text-align: center;
+    color: #3e4555;
+    line-height: 22px;
+    font-size: 70px;
+    font-family: "Montserrat", sans-serif;
 }
 #login{
     margin-top: 100px
@@ -26,79 +32,8 @@ for details on configuring this project to bundle and minify static web assets. 
 #marginTop {
     margin-top: 70px;
 }
-#BecomeMemberButton:link,
-#BecomeMemberButton:visited {
-    text-decoration: none;
-    text-transform: uppercase;
-    position: relative;
-    top: 0;
-    left: 0;
-    padding: 20px 40px;
-    border-radius: 100px;
-    display: inline-block;
-    transition: all .5s;
-    font-family: "Lato",Sans-serif;
-}
 
-#BecomeMemberButton {
-    background: #00ffff;
-    color: #000;
-}
 
-    #BecomeMemberButton:hover {
-        box-shadow: 0px 10px 10px rgba(0,0,0,0.2);
-        transform: translateY(-3px);
-    }
-
-    #BecomeMemberButton:active {
-        box-shadow: 0px 5px 10px rgba(0,0,0,0.2) transform:translateY(-1px);
-    }
-
-#BecomeMemberButton {
-    animation: comeFromBottom 1s ease-out .8s;
-}
-#ClassesHomePage{
-    color: #aaaaaa;
-    text-align: center;
-    font-family: Britannic;
-    margin-bottom: 2rem;
-    text-decoration: underline;
-}
-    #BecomeMemberButton::after {
-        content: "";
-        text-decoration: none;
-        text-transform: uppercase;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        border-radius: 100px;
-        display: inline-block;
-        z-index: -1;
-        transition: all .5s;
-    }
-
-    #BecomeMemberButton::after {
-        background: #fff;
-    }
-
-    #BecomeMemberButton:hover::after {
-        transform: scaleX(1.4) scaleY(1.6);
-        opacity: 0;
-    }
-
-@keyframes comeFromBottom {
-    0% {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -112,6 +47,81 @@ a.navbar-brand {
     text-decoration: solid;
     text-align: center;
 }
+@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800);
+
+.pricing8 {
+    font-family: "Montserrat", sans-serif;
+    color: #8d97ad;
+    font-weight: 300;
+}
+
+    .pricing8 h1,
+    .pricing8 h2,
+    .pricing8 h3,
+    .pricing8 h4,
+    .pricing8 h5,
+    .pricing8 h6 {
+        color: #3e4555;
+    }
+
+    .pricing8 h5 {
+        line-height: 22px;
+        font-size: 18px;
+    }
+
+    .pricing8 .subtitle {
+        color: #8d97ad;
+        line-height: 24px;
+    }
+
+    .pricing8 .display-5 {
+        font-size: 3rem;
+    }
+
+    .pricing8 .font-14 {
+        font-size: 14px;
+    }
+
+    .pricing8 .pricing-box sup {
+        top: -20px;
+        font-size: 16px;
+    }
+
+    .pricing8 .btn-info-gradiant {
+        background: #188ef4;
+        background: -webkit-linear-gradient(legacy-direction(to right), #188ef4 0%, #316ce8 100%);
+        background: -webkit-gradient(linear, left top, right top, from(#188ef4), to(#316ce8));
+        background: -webkit-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+        background: -o-linear-gradient(left, #188ef4 0%, #316ce8 100%);
+        background: linear-gradient(to right, #188ef4 0%, #316ce8 100%);
+    }
+
+        .pricing8 .btn-info-gradiant:hover {
+            background: #316ce8;
+            background: -webkit-linear-gradient(legacy-direction(to right), #316ce8 0%, #188ef4 100%);
+            background: -webkit-gradient(linear, left top, right top, from(#316ce8), to(#188ef4));
+            background: -webkit-linear-gradient(left, #316ce8 0%, #188ef4 100%);
+            background: -o-linear-gradient(left, #316ce8 0%, #188ef4 100%);
+            background: linear-gradient(to right, #316ce8 0%, #188ef4 100%);
+        }
+
+    .pricing8 .btn-danger-gradiant {
+        background: #ff4d7e;
+        background: -webkit-linear-gradient(legacy-direction(to right), #ff4d7e 0%, #ff6a5b 100%);
+        background: -webkit-gradient(linear, left top, right top, from(#ff4d7e), to(#ff6a5b));
+        background: -webkit-linear-gradient(left, #ff4d7e 0%, #ff6a5b 100%);
+        background: -o-linear-gradient(left, #ff4d7e 0%, #ff6a5b 100%);
+        background: linear-gradient(to right, #ff4d7e 0%, #ff6a5b 100%);
+    }
+
+        .pricing8 .btn-danger-gradiant:hover {
+            background: #ff6a5b;
+            background: -webkit-linear-gradient(legacy-direction(to right), #ff6a5b 0%, #ff4d7e 100%);
+            background: -webkit-gradient(linear, left top, right top, from(#ff6a5b), to(#ff4d7e));
+            background: -webkit-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+            background: -o-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
+            background: linear-gradient(to right, #ff6a5b 0%, #ff4d7e 100%);
+        }
 .footer-text {
     color: white;
     font-size: 20px;
@@ -153,7 +163,61 @@ a {
     border-color: #1861ac;
     height: 200px;
 }
+.classMainImage {
+    width: 100%;
+    height: 500px;
+    max-height: fit-content;
+    background-image: url(/img/Fitness-girl-sport-gym_3840x2160.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 
+}
+#imageClasses{
+     height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+}
+
+
+.how-section1 {
+    margin-top: -12%;
+    padding: 10%;
+}
+
+    .how-section1 h4 {
+        color: #ffa500;
+        font-weight: bold;
+        font-size: 90px;
+        padding-bottom: 4px;
+        border-bottom: solid;
+        border-bottom: outset;
+        border-block-end-width: thin;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .how-section1 .subheading {
+        color: #3931af;
+        font-size: 50px;
+    }
+    .how-section1 p{
+        font-size: 30px;
+        color: #ffffff;
+        font-style:italic;
+    }
+
+    .how-section1 .row {
+        margin-top: 5%;
+    }
+
+.how-img {
+    text-align: center;
+}
+
+    .how-img img {
+        width: 1000px;
+    }
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -189,7 +253,8 @@ html {
 }
 
 body {
-    background-image: url("../img/834269.jpg");
+    background-image: url(../img/834269.jpg);
+    /*background-color: #5685d0*/
 }
 .footer {
   bottom: 0;
@@ -206,9 +271,6 @@ body {
     height: 100px;
     min-height: 300px;
     background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 
@@ -263,116 +325,13 @@ body {
         opacity: 1;
     }
 }
-/* pricing tables */
-.pricing-table {
-    background: #e9f0f4;
-    text-align: center;
-    margin: 15px 0;
-}
 
-    .pricing-table ul, .pricing-table ol {
-        margin-bottom: 0;
-        padding-left: 0;
-    }
-
-.pricing-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 30px;
-    margin-bottom: 0;
-}
-
-.pricing-table-price {
-    background: #cdd4d8;
-    font-weight: 700;
-    padding: 30px;
-    margin-bottom: 30px;
-}
-
-    .pricing-table-price.w-rounded-price {
-        display: table;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        margin: 0 auto 30px auto;
-        padding: 0;
-    }
-
-.rounded-price {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
-
-    .rounded-price .pricing-price {
-        font-size: 1.75rem;
-    }
-
-    .rounded-price .pricing-currency {
-        vertical-align: 10px;
-    }
-
-.pricing-table-price p {
-    color: #000;
-    margin-bottom: 0;
-}
-
-.pricing-currency {
-    font-size: 1rem;
-    font-weight: 700;
-    vertical-align: 25px;
-}
-
-.pricing-price {
-    font-size: 3rem;
-    font-weight: 700;
-}
-
-.pricing-period {
-    font-weight: 700;
-}
-
-.pricing-table-content li {
-    margin-bottom: 15px;
-}
-
-.pricing-table-button {
-    padding: 15px 0 35px;
-}
-
-.featured.pricing-table {
-    background: #9c64b8;
-}
-
-    .featured.pricing-table .pricing-title {
-        color: #fff;
-    }
-
-    .featured.pricing-table .pricing-table-content ul li {
-        color: #eee;
-    }
-
-    .featured.pricing-table .pricing-table-price {
-        background: #8853a1;
-    }
-
-        .featured.pricing-table .pricing-table-price p {
-            color: #fff;
-        }
-
-ul {
-    list-style: none;
-    padding: 0;
-}
 
 /*   NabVar */
 .carousel-item {
     height: 100vh;
     min-height: 300px;
     background: no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
 }
 
@@ -455,6 +414,7 @@ ul {
     padding: 5%;
     background: #fff;
     box-shadow: 0px 0px 4px 0px #b0b3b7;
+    
 }
 
 .name {
@@ -462,13 +422,14 @@ ul {
     font-weight: 600;
 }
 
-.bio-image {
-    text-align: center;
+.bio-image img{
+    width: 300px;
+    height: 300px;
+    max-height: 200px;
+    max-width: 200px;
 }
 
-    .bio-image img {
-        border-radius: 50%;
-    }
+    
 
 .bio-content {
     text-align: left;
@@ -479,5 +440,105 @@ ul {
         font-size: 30px;
     }
 
+
+.team {
+    text-align: center
+}
+
+.section {
+    margin-top: 0%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 40px;
+    position: relative;
+    margin-bottom: 40px;
+    margin-top: 0;
+    color: #e8e8e8;
+}
+
+.team .team-item {
+    text-align: left;
+    margin-bottom: 30px;
+    overflow: hidden
+}
+
+    .team .team-item figure {
+        position: relative;
+        overflow: hidden
+    }
+
+img {
+    width: 100%
+}
+
+.team .team-item figure figcaption {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: rgba(9, 9, 9, .6);
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease
+}
+
+    .team .team-item figure figcaption .info {
+        position: absolute;
+        color: #fff;
+        float: left;
+        bottom: 10px;
+        left: 20px;
+        margin-left: -80px;
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        transition: all .5s ease
+    }
+
+.team .team-item figure:hover figcaption {
+    opacity: 1
+}
+
+    .team .team-item figure:hover figcaption .info {
+        margin-left: 0
+    }
+
+.team .team-item figure figcaption .info h3 {
+    font-size: 20px
+}
+
+.team .team-item figure figcaption .info p {
+    color: #fff
+}
+
+.team .team-item figure:hover figcaption .social {
+    margin-bottom: 0
+}
+
+.team .team-item figure figcaption .social {
+    position: absolute;
+    float: right;
+    bottom: 28px;
+    margin-bottom: -80px;
+    right: 20px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease
+}
+
+    .team .team-item figure figcaption .social a {
+        color: #fff;
+        font-size: 15px;
+        width: 36px;
+        height: 36px;
+        background: #3f51b5;
+        display: inline-block;
+        text-align: center;
+        line-height: 36px;
+        border-radius: 2px
+    }
 
 

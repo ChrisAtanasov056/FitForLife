@@ -38,6 +38,10 @@
         public async Task<IActionResult> AddUserToTrainer(string trainerId)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId==null)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
             await trainersService.AddUserToTrainer(trainerId, userId);
             return RedirectToAction("All");
         }

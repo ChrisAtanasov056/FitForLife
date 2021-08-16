@@ -86,26 +86,6 @@
             return user;
         }
 
-        public async Task<FitForLifeUser> ChangeProfilePhotoAsync(string userId, string newProfilePhotoUrl)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<string>> GetAllEmailsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<T>> GetAllUsersAsync<T>(string trainerId = null)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<string> GetCardPictureUrlAsync(string id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task<string> GetFirstNameAsync(string id)
         {
             var user = await this.users
@@ -149,9 +129,5 @@
                 .FirstAsync();
         }
 
-        public Task<int> GetUsersCountAsync(string trainerId = null)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

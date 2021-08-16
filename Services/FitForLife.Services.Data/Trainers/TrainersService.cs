@@ -60,14 +60,17 @@
             await trainersRepository.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAllTrainersAsync<T>()
+        public async Task<List<T>> GetAllTrainersAsync<T>(int? count = null)
         {
             var trainers = await this.trainersRepository
                  .All()
                  .Where(x => x.Roles.Any(y => y.RoleId == this.trainerRoleId))
                  .To<T>()
                  .ToListAsync();
-
+            if (count.HasValue)
+            {
+                trainers = trainers.Take(count.Value).ToList();
+            }
             return trainers;
         }
         public async Task DeleteAsync(string id)

@@ -14,7 +14,7 @@ namespace FitForLife.Services.Data.Events
 
         Task<T> GetByIdAsync<T>(string id);
 
-        public Task<Event> AddUserToEvent(string userId, string eventId);
+        Task<Event> AddUserToEvent(string userId, string eventId);
 
         Task AddAsync(int classId, DateTime startEvent, DateTime endEvent, int availableSpots, string description);
     }
