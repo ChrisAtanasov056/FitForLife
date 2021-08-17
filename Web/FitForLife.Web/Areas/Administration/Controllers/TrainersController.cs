@@ -32,12 +32,12 @@ namespace FitForLife.Areas.Administration.Controllers
             return this.View(viewModel);
         }
 
-        public IActionResult AddTrainer()
+        public async Task<IActionResult> AddTrainer()
         {
-            var viewModels = classesService.GetAllAsync<ClassViewModel>().Result.Select(x=>x.Id);
-            var viewModelsNames = classesService.GetAllAsync<ClassViewModel>().Result.Select(x => x.Name);
-            this.ViewData["Classes"] = new SelectList(viewModels);
-            this.ViewData["ClassesNames"] = new SelectList(viewModelsNames);
+            var classViews = await this.classesService.GetAllAsync<ClassViewModel>();
+            this.ViewData["Classes"] = new SelectList(classViews,
+                nameof(ClassViewModel.Id),
+                nameof(ClassViewModel.Name));
             return this.View();
         }
 
