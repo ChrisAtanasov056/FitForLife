@@ -6,21 +6,29 @@
 }
 @if (Model.Input.Card != null)
 {
-    
-    <div  class="card" style="width: 18rem; background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
+
+<div class="card" style="width: 18rem; background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
+    @if (Model.Input.ProfilePicUrl != null)
+    {
         <img src="@Model.Input.ProfilePicUrl" class="img-fluid border-white border-w-5 w-50 w-md-80 w-lg-60 rounded-circle" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Input.FirstName @Model.Input.LastName</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <ul class="list-group list-group-flush" style="background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
-            <li class="list-group-item">Start Date:@Model.Input.Card.CreatedOn</li>
-            <li class="list-group-item">Visits: @Model.Input.Card.Visits</li>
-        </ul>
-        <div class="card-body">
-            <a href="#" class="btn btn-primary ">Find Class</a>
-        </div>
+
+    }
+    @if(Model.Input.ProfilePicUrl == null)
+    {
+    <img class="img-fluid border-white border-w-5 w-50 w-md-80 w-lg-60 rounded-circle" alt="..." onerror="this.src='https://media.istockphoto.com/vectors/profile-picture-vector-illustration-vector-id587805078?k=6&amp;m=587805078&amp;s=612x612&amp;w=0&amp;h=V8K7LhR1SdPsf9qdtmCzUTqOn0Vx-Hr5FXyCBsGd6tQ='" src="https://media.istockphoto.com/vectors/profile-picture-vector-illustration-vector-id587805078?k=6&amp;m=587805078&amp;s=612x612&amp;w=0&amp;h=V8K7LhR1SdPsf9qdtmCzUTqOn0Vx-Hr5FXyCBsGd6tQ=">
+    }
+    <div class="card-body">
+        <h5 class="card-title">@Model.Input.FirstName @Model.Input.LastName</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
+    <ul class="list-group list-group-flush" style="background-image: url(https://4.imimg.com/data4/QY/WC/MY-8965465/silver-metal-sheet-500x500.jpg)">
+        <li class="list-group-item">Start Date:@Model.Input.Card.CreatedOn</li>
+        <li class="list-group-item">Visits: @Model.Input.Card.Visits</li>
+    </ul>
+    <div class="card-body">
+        <a asp-area="" asp-controller="Appointments" asp-action="Index" class="btn btn-primary ">Find Class</a>
+    </div>
+</div>
 }
 <table class="table">
     <thead>

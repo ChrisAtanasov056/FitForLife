@@ -129,5 +129,23 @@
                 .FirstAsync();
         }
 
+        public async Task<string> GetProfilePicAsync(string id)
+        {
+            var user = await this.users
+                    .All()
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+            return user.ProfilePictureUrl;
+        }
+
+        public async Task<FitForLifeUser> ChangeProfilePicAsync(string id, string url)
+        {
+            var user = await this.users
+                   .All()
+                   .FirstOrDefaultAsync(x => x.Id == id);
+            user.ProfilePictureUrl = url;
+            await this.users.SaveChangesAsync();
+            return user;
+        }
     }
 }

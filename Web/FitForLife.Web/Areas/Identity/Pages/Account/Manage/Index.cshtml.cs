@@ -164,6 +164,7 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var firstName = await this.userService.GetFirstNameAsync(user.Id);
             var lastName = await this.userService.GetLastNameAsync(user.Id);
+            var profilePic = await this.userService.GetProfilePicAsync(user.Id);
             if (this.Input.FirstName != firstName)
             {
                 await this.userService.ChangeFirstNameAsync(user.Id, this.Input.FirstName);
@@ -172,6 +173,10 @@ namespace FitForLife.Areas.Identity.Pages.Account.Manage
             if (this.Input.LastName != lastName)
             {
                 await this.userService.ChangeLastNameAsync(user.Id, this.Input.LastName);
+            }
+            if (this.Input.ProfilePicUrl != profilePic)
+            {
+                await this.userService.ChangeProfilePicAsync(user.Id, this.Input.ProfilePicUrl);
             }
             if (Input.PhoneNumber != phoneNumber)
             {

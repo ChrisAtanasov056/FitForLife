@@ -15,6 +15,10 @@
 
         public Task<FitForLifeUser> ChangeFirstNameAsync(string id, string firstName);
 
+        public Task<FitForLifeUser> ChangeProfilePicAsync(string id, string url);
+
+        public Task<string> GetProfilePicAsync(string id);
+
         public Task<FitForLifeUser> ChangeLastNameAsync(string id, string lastName);
 
         public Task<FitForLifeUser> ChangeEmailAsync(string userId, string newEmail);
