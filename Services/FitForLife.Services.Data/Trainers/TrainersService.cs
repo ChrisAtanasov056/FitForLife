@@ -75,7 +75,10 @@
         }
         public async Task DeleteAsync(string id)
         {
-            var trainer = GetTrainerById<FitForLifeUser>(id).Result;
+            var trainer = await this.trainersRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
             this.trainersRepository.Delete(trainer);
             await this.trainersRepository.SaveChangesAsync();
         }

@@ -8,6 +8,7 @@
 
     public class BlogViewModel: IMapFrom<Blog>
     {
+        
         public string Id { get; init; }
 
         public string Name { get; set; }
@@ -24,6 +25,6 @@
 
         public ICollection<CommentViewModel> Comments { get; set; }
 
-        public CommentInputModel CommentInputModel { get; set; }
+        public CommentInputModel CommentInputModel { get; set; } = new CommentInputModel();
     }
 }

@@ -221,7 +221,11 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 17px;
+}
+.EventView{
+    margin-top: 60px;
+    color: #fff;
 }
 @media (min-width: 768px) {
   html {

@@ -15,9 +15,11 @@ namespace FitForLife.Web.ViewModels.Blog
         public string Context { get; set; }
 
         public TypeBlog TypeBlog { get; set; }
-
+        
+        [Required]
         public string ImageUrl { get; set; }
 
+        [Required]
         public string Author { get; set; }
     }
 }

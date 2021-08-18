@@ -1,6 +1,7 @@
 ﻿namespace FitForLife.Services.Data.Trainers
 {
     using FitForLife.Data.Models;
+    using FitForLife.Web.ViewModels.Trainers;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

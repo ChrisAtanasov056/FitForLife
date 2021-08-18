@@ -2,9 +2,8 @@
 {
     using FitForLife.Data.Common.Repositories;
     using FitForLife.Data.Models;
+    using FitForLife.Services.Data.Cards;
     using FitForLife.Services.Mapping;
-    using FitForLife.Web.ViewModels;
-    using FitForLife.Web.ViewModels.Classes;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -16,14 +15,14 @@
         private readonly IDeletableEntityRepository<FitForLifeUser> userRepository;
         private readonly IDeletableEntityRepository<Event> eventRepository;
         private readonly IDeletableEntityRepository<Card> cardRepository;
-        private readonly IDeletableEntityRepository<Class> classRepository;
+        private readonly ICardsService cardService;
 
-        public EventService(IDeletableEntityRepository<Event> eventRepository, IDeletableEntityRepository<FitForLifeUser> userRepository, IDeletableEntityRepository<Card> cardRepository, IDeletableEntityRepository<Class> classRepository)
+        public EventService(IDeletableEntityRepository<Event> eventRepository, IDeletableEntityRepository<FitForLifeUser> userRepository, IDeletableEntityRepository<Card> cardRepository, ICardsService cardService)
         {
             this.eventRepository = eventRepository;
             this.userRepository = userRepository;
             this.cardRepository = cardRepository;
-            this.classRepository = classRepository;
+            this.cardService = cardService;
         }
 
         public async Task AddAsync(int classId, DateTime startEvent, DateTime endEvent, int availableSpots, string description)
@@ -69,10 +68,18 @@
                     return @event = null;
                 }
                 user.Card = curCard;
-                user.Card.Visits -= 1;
-                @event.AvailableSpots -= 1;
-                user.Appointments.Add(appointment);
-                @event.Appointments.Add(appointment);
+                if (user.Card.Visits > 0 && user.Appointments.Any(x=> x.EventId != @eventId))
+                {
+                    user.Card.Visits -= 1;
+                    @event.AvailableSpots -= 1;
+                    user.Appointments.Add(appointment);
+                    @event.Appointments.Add(appointment);
+                }
+                if (user.Card.Visits == 0)
+                {
+                    await this.cardService.DeleteAsync(user.Card.Id);
+                }
+
                 await eventRepository.SaveChangesAsync();
                 await userRepository.SaveChangesAsync();
             }

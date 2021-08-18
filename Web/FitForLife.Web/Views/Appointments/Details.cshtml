@@ -1,6 +1,6 @@
 ﻿@model FitForLife.Web.ViewModels.Events.EventViewModel
 
-<section class="py-5">
+<section class="EventView">
     <div class="container">
         <h1 style="margin: 2%; text-align: center;">Event</h1>
         <div>
@@ -23,18 +23,25 @@
                 <label>Description</label>
                 <input type="text" readonly class="form-control" value="@Model.Description">
             </div>
-            <div class="form-group">
-                <label>Available Spots</label>
-                <input type="number" readonly class="form-control" value="@Model.AvailableSpots">
-            </div>
-            <div class="btn btn-info btn-lg">
-                <form asp-action="AddUserToEvent" asp-controller="Appointments" method="post">
-                    <input type="text" name="EventId" value="@Model.Id" hidden />
-                    <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
-                        Join!
-                    </button>
-                </form>
-            </div>
+            @if (Model.AvailableSpots > 0)
+            {
+                <div class="form-group">
+                    <label>Available Spots</label>
+                    <input type="number" readonly class="form-control" value="@Model.AvailableSpots">
+                </div>
+                <div class="btn btn-info btn-lg">
+                    <form asp-action="AddUserToEvent" asp-controller="Appointments" method="post">
+                        <input type="text" name="EventId" value="@Model.Id" hidden />
+                        <button type="submit" class="btn btn-danger-gradiant rounded-pill text-white btn-md border-0">
+                            Join!
+                        </button>
+                    </form>
+                </div>
+            }
+            @if (Model.AvailableSpots == 0)
+            {
+                <h3 style="color: #ffffff"> Sorry , no more available spot for this event!</h3>    
+            }
 
         </div>
     </div>
