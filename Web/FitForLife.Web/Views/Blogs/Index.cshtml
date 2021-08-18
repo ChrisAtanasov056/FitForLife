@@ -33,7 +33,7 @@
                             <h3 class="md-heading"><a asp-controller="Blogs" asp-action="Details" asp-route-id="@blogView.Id">@blogView.Name</a></h3>
                             @if (@blogView.Context.Length > 300)
                             {
-                                <p>@blogView.Context.Substring(0, 300) ...</p>
+                            <p>@blogView.Context.Substring(0, 300) ...</p>
 
                             }
                             @if(@blogView.Context.Length <= 300)
@@ -41,25 +41,17 @@
                             <p>@blogView.Context.ToString()</p>
 
                             }
-                            <button type="button" class="btn-outline-primary btn-lg">
-                                <a asp-controller="Blogs" asp-action="Details" asp-route-id="@blogView.Id">Read More</a>
-                            </button>
+                            <form asp-action="Details" asp-controller="Blogs" asp-route-id="@blogView.Id" method="get">
+                                <button type="submit" class="btn btn-info rounded-pill text-dark btn-md border-0">
+                                   Read More
+                                </button>
+                            </form>
+                           
                         </div>
                     </div>
                 </div>
             </article>
         }
-        <div class="pagination-wrap">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="clearfix"></div>
+         <div class="clearfix"></div>
     </div>
 </div>

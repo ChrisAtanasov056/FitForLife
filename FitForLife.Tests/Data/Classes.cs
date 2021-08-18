@@ -8,8 +8,8 @@ namespace FitForLife.Tests.Data
 {
     public class Classes
     {
-        public static List<HomeClassViewModel> ThreeClasses
-            => Enumerable.Range(0, 3).Select(i => new HomeClassViewModel
+        public static List<Class> ThreeClasses
+            => Enumerable.Range(0, 3).Select(i => new Class
             {
                 Name = new Word().ToString(),
                 PictureUrl = new Sentence().ToString(),

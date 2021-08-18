@@ -4,9 +4,11 @@
     <div class="event">
         <h4>@Model.Class.Name</h4>
         <p>@Model.StartEvent.ToString("t") - @Model.EndEvent.ToString("t")</p>
-        <div class="btn btn-info btn-sm">
-            <a asp-controller="Appointments" asp-action="Details" asp-route-id="@Model.Id">Details</a>
-        </div>
+        <form asp-action="Details" asp-controller="Appointments" asp-route-id="@Model.Id" method="get">
+            <button type="submit" class="btn btn-info rounded-pill text-dark btn-sm border-0">
+                Read More
+            </button>
+        </form>
     </div>
 </div>
 

@@ -263,8 +263,8 @@ body {
 .footer {
   bottom: 0;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  height: 50px;
+  margin-top: 100px;
 }
 
 #homeCardClasses{
